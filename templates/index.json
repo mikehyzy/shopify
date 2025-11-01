@@ -1,11 +1,41 @@
 {
   "sections": {
-    "simple_hero": {
-      "type": "simple-hero",
-      "settings": {}
+    "hero": {
+      "type": "hero-surrealist",
+      "settings": {
+        "eyebrow_text": "An Invitation-Only Community",
+        "heading": "Welcome to the Chicago Futures Salon",
+        "subheading": "Exploring futures thinking through Surrealist, Situationist, and Futurist methods",
+        "button_label": "Request Invitation",
+        "button_link": "#invitation",
+        "button_label_secondary": "Explore Games",
+        "button_link_secondary": "#games",
+        "show_quote": true,
+        "quote_text": "The marvelous is always beautiful, anything marvelous is beautiful, in fact only the marvelous is beautiful.",
+        "quote_author": "André Breton"
+      }
+    },
+    "games": {
+      "type": "games-showcase",
+      "settings": {
+        "heading": "Future-Thinking Games",
+        "subheading": "Explore our collection of card games designed to unlock futures thinking"
+      }
+    },
+    "invitation": {
+      "type": "invitation-form",
+      "settings": {
+        "heading": "Request an Invitation",
+        "subheading": "The Chicago Futures Salon is an invitation-only community. Share your interest and we'll be in touch.",
+        "show_quote": true,
+        "quote_text": "We seek leaders who are willing to challenge assumptions and imagine radically different futures.",
+        "show_info_cards": true
+      }
     }
   },
   "order": [
-    "simple_hero"
+    "hero",
+    "games",
+    "invitation"
   ]
 }
