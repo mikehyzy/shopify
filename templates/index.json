@@ -17,37 +17,111 @@
     },
     "manifesto": {
       "type": "manifesto-accordion",
+      "blocks": {
+        "panel-1": {
+          "type": "panel",
+          "settings": {
+            "title": "Futures Thinking",
+            "content": "<p>We explore multiple possible futures through creative methodologies, challenging assumptions about what tomorrow might bring. Our approach combines rigorous analysis with imaginative speculation.</p>"
+          }
+        },
+        "panel-2": {
+          "type": "panel",
+          "settings": {
+            "title": "Invitation-Only Community",
+            "content": "<p>Our salon brings together thought leaders, innovators, and creative thinkers to imagine and shape possible futures. We maintain an intimate setting to foster deep conversation and collaboration.</p>"
+          }
+        },
+        "panel-3": {
+          "type": "panel",
+          "settings": {
+            "title": "Experimental Methods",
+            "content": "<p>Drawing from Surrealism, Situationism, and Futurism, we employ games, scenarios, and provocations to unlock new perspectives. Our methods are designed to challenge conventional thinking.</p>"
+          }
+        },
+        "panel-4": {
+          "type": "panel",
+          "settings": {
+            "title": "Chicago Focus",
+            "content": "<p>While our methods are universal, our focus is local. We explore futures for Chicago and the Midwest, bringing global perspectives to regional challenges and opportunities.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "panel-1",
+        "panel-2",
+        "panel-3",
+        "panel-4"
+      ],
       "settings": {
         "heading": "Our Manifesto",
-        "subheading": "The principles that guide our exploration of possible futures",
-        "show_ground_rules": true,
-        "show_values": true
+        "subheading": "The principles that guide our exploration of possible futures"
       }
     },
     "games": {
       "type": "games-showcase",
       "settings": {
         "heading": "Future-Thinking Games",
-        "subheading": "Explore our collection of card games designed to unlock futures thinking"
+        "subheading": "Explore our collection of card games designed to unlock futures thinking",
+        "products_to_show": 6,
+        "show_view_all": true
       }
     },
     "events": {
       "type": "events-timeline",
+      "blocks": {
+        "event-1": {
+          "type": "event",
+          "settings": {
+            "title": "Futures Salon: Chicago 2050",
+            "event_date": "2025-12-15",
+            "event_time": "6:00 PM - 9:00 PM",
+            "location": "Private Location - Chicago",
+            "description": "Join us for an evening exploring possible futures for Chicago through scenario planning, creative games, and futures mapping exercises. Limited to 20 participants.",
+            "show_rsvp": true,
+            "rsvp_link": "#invitation"
+          }
+        },
+        "event-2": {
+          "type": "event",
+          "settings": {
+            "title": "Surrealist Methods Workshop",
+            "event_date": "2026-01-22",
+            "event_time": "7:00 PM - 10:00 PM",
+            "location": "TBD",
+            "description": "Explore Surrealist creative techniques adapted for futures thinking and strategic foresight. Hands-on workshop with experimental exercises.",
+            "show_rsvp": true,
+            "rsvp_link": "#invitation"
+          }
+        },
+        "event-3": {
+          "type": "event",
+          "settings": {
+            "title": "Futures Gaming Night",
+            "event_date": "2026-02-10",
+            "event_time": "6:30 PM - 9:30 PM",
+            "location": "Private Location - Chicago",
+            "description": "An evening of futures-oriented card games and strategic scenarios. Bring your curiosity and imagination.",
+            "show_rsvp": true,
+            "rsvp_link": "#invitation"
+          }
+        }
+      },
+      "block_order": [
+        "event-1",
+        "event-2",
+        "event-3"
+      ],
       "settings": {
         "heading": "Upcoming Events",
-        "subheading": "Join us for intimate gatherings exploring the future",
-        "show_filters": true,
-        "show_past_events_link": true
+        "subheading": "Join us for intimate gatherings exploring the future"
       }
     },
     "invitation": {
       "type": "invitation-form",
       "settings": {
         "heading": "Request an Invitation",
-        "subheading": "The Chicago Futures Salon is an invitation-only community. Share your interest and we'll be in touch.",
-        "show_quote": true,
-        "quote_text": "We seek leaders who are willing to challenge assumptions and imagine radically different futures.",
-        "show_info_cards": true
+        "subheading": "The Chicago Futures Salon is an invitation-only community. Share your interest and we'll be in touch."
       }
     }
   },
