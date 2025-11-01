@@ -1,51 +1,138 @@
 {% comment %}
-  Manifesto Section - Black and White
+  Manifesto Section - Accordion with Alpine.js
 {% endcomment %}
 
 <section class="manifesto-section section relative"
          style="background-color: #000000; padding: 80px 0;"
          id="manifesto">
 
-  <div class="container-custom">
+  <div class="container-custom" style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
 
     <!-- Section Header -->
     <div class="text-center mb-16">
-      <h2 class="text-4xl font-heading font-bold mb-6 text-white">
+      <h2 class="text-white font-bold mb-6" style="font-size: clamp(2rem, 5vw, 4rem); font-family: 'Open Sans', sans-serif;">
         {{ section.settings.heading | default: "Our Manifesto" }}
       </h2>
       {% if section.settings.subheading != blank %}
-        <p class="text-xl text-white max-w-3xl mx-auto">
+        <p class="text-white text-xl max-w-3xl mx-auto" style="opacity: 0.85;">
           {{ section.settings.subheading }}
         </p>
       {% endif %}
     </div>
 
-    <!-- Content -->
+    <!-- Accordion Content -->
     <div class="max-w-4xl mx-auto">
 
       {% if section.blocks.size > 0 %}
-        {% for block in section.blocks %}
-          <div class="mb-8 p-8 border border-white/20" style="background-color: #111;">
-            <h3 class="text-2xl font-heading font-bold mb-4 text-white">
-              {{ block.settings.title }}
-            </h3>
-            {% if block.settings.content != blank %}
-              <div class="text-white">
-                {{ block.settings.content }}
+        <!-- Accordion Panels -->
+        <div class="space-y-4">
+          {% for block in section.blocks %}
+            <div x-data="{ open: {{ forloop.first }} }"
+                 class="accordion-panel border border-white/20"
+                 style="background-color: #0a0a0a;">
+
+              <!-- Panel Header (Clickable) -->
+              <button @click="open = !open"
+                      class="w-full flex items-center justify-between p-6 text-left hover:bg-white/5 transition-colors"
+                      aria-expanded="false">
+                <h3 class="text-white font-bold text-2xl" style="font-family: 'Open Sans', sans-serif;">
+                  {{ block.settings.title | default: "Panel Title" }}
+                </h3>
+                <svg class="w-6 h-6 text-white transition-transform duration-300"
+                     :class="{ 'rotate-180': open }"
+                     fill="none"
+                     stroke="currentColor"
+                     viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+
+              <!-- Panel Content (Collapsible) -->
+              <div x-show="open"
+                   x-collapse
+                   class="panel-content">
+                <div class="p-6 pt-0">
+                  {% if block.settings.content != blank %}
+                    <div class="text-white prose prose-invert max-w-none" style="opacity: 0.85; line-height: 1.7;">
+                      {{ block.settings.content }}
+                    </div>
+                  {% else %}
+                    <p class="text-white/60 italic">Add content to this panel...</p>
+                  {% endif %}
+                </div>
               </div>
-            {% endif %}
-          </div>
-        {% endfor %}
-      {% else %}
-        <!-- Placeholder content -->
-        <div class="text-center py-12">
-          <p class="text-white text-lg mb-4">
-            This section will display your manifesto content.
-          </p>
-          <p class="text-white/60">
-            Add content blocks in the theme customizer.
-          </p>
+
+            </div>
+          {% endfor %}
         </div>
+
+      {% else %}
+        <!-- Default Content When No Blocks -->
+        <div class="space-y-4">
+          <!-- Sample Panel 1 -->
+          <div x-data="{ open: true }" class="accordion-panel border border-white/20" style="background-color: #0a0a0a;">
+            <button @click="open = !open"
+                    class="w-full flex items-center justify-between p-6 text-left hover:bg-white/5 transition-colors">
+              <h3 class="text-white font-bold text-2xl">Futures Thinking</h3>
+              <svg class="w-6 h-6 text-white transition-transform duration-300"
+                   :class="{ 'rotate-180': open }"
+                   fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div x-show="open" x-collapse class="panel-content">
+              <div class="p-6 pt-0">
+                <p class="text-white" style="opacity: 0.85; line-height: 1.7;">
+                  We explore multiple possible futures through creative methodologies, challenging assumptions about what tomorrow might bring.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sample Panel 2 -->
+          <div x-data="{ open: false }" class="accordion-panel border border-white/20" style="background-color: #0a0a0a;">
+            <button @click="open = !open"
+                    class="w-full flex items-center justify-between p-6 text-left hover:bg-white/5 transition-colors">
+              <h3 class="text-white font-bold text-2xl">Invitation-Only Community</h3>
+              <svg class="w-6 h-6 text-white transition-transform duration-300"
+                   :class="{ 'rotate-180': open }"
+                   fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div x-show="open" x-collapse class="panel-content">
+              <div class="p-6 pt-0">
+                <p class="text-white" style="opacity: 0.85; line-height: 1.7;">
+                  Our salon brings together thought leaders, innovators, and creative thinkers to imagine and shape possible futures.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sample Panel 3 -->
+          <div x-data="{ open: false }" class="accordion-panel border border-white/20" style="background-color: #0a0a0a;">
+            <button @click="open = !open"
+                    class="w-full flex items-center justify-between p-6 text-left hover:bg-white/5 transition-colors">
+              <h3 class="text-white font-bold text-2xl">Experimental Methods</h3>
+              <svg class="w-6 h-6 text-white transition-transform duration-300"
+                   :class="{ 'rotate-180': open }"
+                   fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div x-show="open" x-collapse class="panel-content">
+              <div class="p-6 pt-0">
+                <p class="text-white" style="opacity: 0.85; line-height: 1.7;">
+                  Drawing from Surrealism, Situationism, and Futurism, we employ games, scenarios, and provocations to unlock new perspectives.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-center text-white/50 mt-8 text-sm">
+          Customize this section by adding content blocks in the theme editor
+        </p>
       {% endif %}
 
     </div>
@@ -54,7 +141,7 @@
 
 {% schema %}
 {
-  "name": "Manifesto",
+  "name": "Manifesto Accordion",
   "settings": [
     {
       "type": "text",
@@ -65,31 +152,32 @@
     {
       "type": "textarea",
       "id": "subheading",
-      "label": "Subheading"
+      "label": "Subheading",
+      "default": "The principles that guide our exploration of possible futures"
     }
   ],
   "blocks": [
     {
       "type": "panel",
-      "name": "Content Panel",
+      "name": "Accordion Panel",
       "settings": [
         {
           "type": "text",
           "id": "title",
-          "label": "Title",
+          "label": "Panel Title",
           "default": "Panel Title"
         },
         {
           "type": "html",
           "id": "content",
-          "label": "Content"
+          "label": "Panel Content"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Manifesto"
+      "name": "Manifesto Accordion"
     }
   ]
 }

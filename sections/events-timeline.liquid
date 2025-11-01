@@ -1,92 +1,175 @@
 {% comment %}
-  Events Timeline Section - Black and White
+  Events Timeline Section
 {% endcomment %}
 
 <section class="events-timeline section relative"
          style="background-color: #000000; padding: 80px 0;"
          id="events">
 
-  <div class="container-custom">
+  <div class="container-custom" style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
 
     <!-- Section Header -->
     <div class="text-center mb-16">
-      <h2 class="text-4xl font-heading font-bold mb-6 text-white">
-        {{ section.settings.heading | default: "Events" }}
+      <h2 class="text-white font-bold mb-6" style="font-size: clamp(2rem, 5vw, 4rem); font-family: 'Open Sans', sans-serif;">
+        {{ section.settings.heading | default: "Upcoming Events" }}
       </h2>
       {% if section.settings.subheading != blank %}
-        <p class="text-xl text-white max-w-3xl mx-auto">
+        <p class="text-white text-xl max-w-3xl mx-auto" style="opacity: 0.85;">
           {{ section.settings.subheading }}
         </p>
       {% endif %}
     </div>
 
     <!-- Events List -->
-    <div class="max-w-4xl mx-auto">
+    <div class="max-w-5xl mx-auto">
 
       {% if section.blocks.size > 0 %}
-        <div class="space-y-8">
+        <div style="display: flex; flex-direction: column; gap: 2rem;">
           {% for block in section.blocks %}
             {% if block.type == 'event' %}
-              <div class="event-card border border-white/20 p-8" style="background-color: #111;">
+              <div class="event-card" style="display: flex; gap: 2rem; border: 1px solid rgba(255, 255, 255, 0.2); padding: 2rem; background-color: #0a0a0a; transition: all 0.3s;">
 
-                <div class="flex flex-col md:flex-row gap-6">
+                <!-- Date Box -->
+                <div style="flex-shrink: 0; width: 120px;">
+                  {% if block.settings.event_date != blank %}
+                    <div style="border: 2px solid #ffffff; padding: 1rem; text-align: center;">
+                      <div style="color: #ffffff; font-size: 2.5rem; font-weight: 700; line-height: 1;">
+                        {{ block.settings.event_date | date: "%d" }}
+                      </div>
+                      <div style="color: #ffffff; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.5rem;">
+                        {{ block.settings.event_date | date: "%b" }}
+                      </div>
+                      <div style="color: #ffffff; opacity: 0.6; font-size: 0.75rem;">
+                        {{ block.settings.event_date | date: "%Y" }}
+                      </div>
+                    </div>
+                  {% else %}
+                    <div style="border: 2px solid #ffffff; padding: 1rem; text-align: center; height: 100%; display: flex; align-items: center; justify-content: center;">
+                      <svg style="width: 32px; height: 32px; opacity: 0.3;" fill="none" stroke="white" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                      </svg>
+                    </div>
+                  {% endif %}
+                </div>
 
-                  <div class="md:w-32 flex-shrink-0">
-                    {% if block.settings.event_date != blank %}
-                      <div class="text-center border border-white p-4">
-                        <div class="text-3xl font-bold text-white">
-                          {{ block.settings.event_date | date: "%d" }}
-                        </div>
-                        <div class="text-sm text-white uppercase">
-                          {{ block.settings.event_date | date: "%b %Y" }}
-                        </div>
+                <!-- Event Info -->
+                <div style="flex: 1;">
+                  <h3 style="font-family: 'Open Sans', sans-serif; color: #ffffff; font-weight: 700; font-size: 1.75rem; margin-bottom: 0.75rem;">
+                    {{ block.settings.title | default: "Event Title" }}
+                  </h3>
+
+                  <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem;">
+                    {% if block.settings.event_time != blank %}
+                      <div style="display: flex; align-items: center; gap: 0.5rem; color: #ffffff; opacity: 0.7; font-size: 0.875rem;">
+                        <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>{{ block.settings.event_time }}</span>
+                      </div>
+                    {% endif %}
+
+                    {% if block.settings.location != blank %}
+                      <div style="display: flex; align-items: center; gap: 0.5rem; color: #ffffff; opacity: 0.7; font-size: 0.875rem;">
+                        <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        <span>{{ block.settings.location }}</span>
                       </div>
                     {% endif %}
                   </div>
 
-                  <div class="flex-1">
-                    <h3 class="text-2xl font-heading font-bold mb-2 text-white">
-                      {{ block.settings.title }}
-                    </h3>
+                  {% if block.settings.description != blank %}
+                    <p style="color: #ffffff; opacity: 0.85; line-height: 1.7; margin-bottom: 1.5rem;">
+                      {{ block.settings.description }}
+                    </p>
+                  {% endif %}
 
-                    {% if block.settings.event_time != blank %}
-                      <p class="text-white/70 mb-2">
-                        🕐 {{ block.settings.event_time }}
-                      </p>
-                    {% endif %}
-
-                    {% if block.settings.location != blank %}
-                      <p class="text-white/70 mb-4">
-                        📍 {{ block.settings.location }}
-                      </p>
-                    {% endif %}
-
-                    {% if block.settings.description != blank %}
-                      <p class="text-white mb-4">
-                        {{ block.settings.description }}
-                      </p>
-                    {% endif %}
-
-                    {% if block.settings.show_rsvp %}
-                      <a href="{{ block.settings.rsvp_link }}" class="btn btn-primary">
-                        RSVP
-                      </a>
-                    {% endif %}
-                  </div>
+                  {% if block.settings.show_rsvp %}
+                    <a href="{{ block.settings.rsvp_link | default: '#invitation' }}"
+                       class="event-rsvp-btn"
+                       style="display: inline-block; padding: 0.75rem 2rem; background-color: #ffffff; color: #000000; text-decoration: none; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; border: 2px solid #ffffff; transition: all 0.3s;">
+                      RSVP →
+                    </a>
+                  {% endif %}
                 </div>
+
               </div>
             {% endif %}
           {% endfor %}
         </div>
+
       {% else %}
-        <div class="text-center py-12">
-          <p class="text-white text-lg mb-4">
-            This section will display your upcoming events.
-          </p>
-          <p class="text-white/60">
-            Add event blocks in the theme customizer.
-          </p>
+        <!-- Default Sample Events -->
+        <div style="display: flex; flex-direction: column; gap: 2rem;">
+
+          <!-- Sample Event 1 -->
+          <div class="event-card" style="display: flex; gap: 2rem; border: 1px solid rgba(255, 255, 255, 0.2); padding: 2rem; background-color: #0a0a0a;">
+            <div style="flex-shrink: 0; width: 120px;">
+              <div style="border: 2px solid #ffffff; padding: 1rem; text-align: center;">
+                <div style="color: #ffffff; font-size: 2.5rem; font-weight: 700; line-height: 1;">15</div>
+                <div style="color: #ffffff; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.5rem;">DEC</div>
+                <div style="color: #ffffff; opacity: 0.6; font-size: 0.75rem;">2025</div>
+              </div>
+            </div>
+            <div style="flex: 1;">
+              <h3 style="font-family: 'Open Sans', sans-serif; color: #ffffff; font-weight: 700; font-size: 1.75rem; margin-bottom: 0.75rem;">
+                Futures Salon: Chicago 2050
+              </h3>
+              <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; color: #ffffff; opacity: 0.7; font-size: 0.875rem;">
+                  <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                  <span>6:00 PM - 9:00 PM</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; color: #ffffff; opacity: 0.7; font-size: 0.875rem;">
+                  <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  </svg>
+                  <span>Private Location - Chicago</span>
+                </div>
+              </div>
+              <p style="color: #ffffff; opacity: 0.85; line-height: 1.7; margin-bottom: 1.5rem;">
+                Join us for an evening exploring possible futures for Chicago through scenario planning, creative games, and futures mapping exercises.
+              </p>
+              <span style="color: #ffffff; opacity: 0.5; font-size: 0.75rem;">Sample Event</span>
+            </div>
+          </div>
+
+          <!-- Sample Event 2 -->
+          <div class="event-card" style="display: flex; gap: 2rem; border: 1px solid rgba(255, 255, 255, 0.2); padding: 2rem; background-color: #0a0a0a;">
+            <div style="flex-shrink: 0; width: 120px;">
+              <div style="border: 2px solid #ffffff; padding: 1rem; text-align: center;">
+                <div style="color: #ffffff; font-size: 2.5rem; font-weight: 700; line-height: 1;">22</div>
+                <div style="color: #ffffff; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.5rem;">JAN</div>
+                <div style="color: #ffffff; opacity: 0.6; font-size: 0.75rem;">2026</div>
+              </div>
+            </div>
+            <div style="flex: 1;">
+              <h3 style="font-family: 'Open Sans', sans-serif; color: #ffffff; font-weight: 700; font-size: 1.75rem; margin-bottom: 0.75rem;">
+                Surrealist Methods Workshop
+              </h3>
+              <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; color: #ffffff; opacity: 0.7; font-size: 0.875rem;">
+                  <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                  <span>7:00 PM - 10:00 PM</span>
+                </div>
+              </div>
+              <p style="color: #ffffff; opacity: 0.85; line-height: 1.7; margin-bottom: 1.5rem;">
+                Explore Surrealist creative techniques adapted for futures thinking and strategic foresight.
+              </p>
+              <span style="color: #ffffff; opacity: 0.5; font-size: 0.75rem;">Sample Event</span>
+            </div>
+          </div>
+
         </div>
+
+        <p class="text-center" style="color: #ffffff; opacity: 0.5; margin-top: 2rem; font-size: 0.875rem;">
+          Add event blocks in the theme customizer to display your events
+        </p>
       {% endif %}
 
     </div>
@@ -94,26 +177,12 @@
 </section>
 
 <style>
-  .btn {
-    display: inline-block;
-    padding: 1rem 2rem;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    transition: all 0.3s;
-    cursor: pointer;
-    border-radius: 0;
-    text-decoration: none;
+  .event-card:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateX(4px);
   }
 
-  .btn-primary {
-    background-color: #ffffff;
-    color: #000000;
-    border: 2px solid #ffffff;
-  }
-
-  .btn-primary:hover {
+  .event-rsvp-btn:hover {
     background-color: #000000;
     color: #ffffff;
   }
@@ -127,12 +196,13 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Events"
+      "default": "Upcoming Events"
     },
     {
       "type": "textarea",
       "id": "subheading",
-      "label": "Subheading"
+      "label": "Subheading",
+      "default": "Join us for intimate gatherings exploring the future"
     }
   ],
   "blocks": [
@@ -143,19 +213,19 @@
         {
           "type": "text",
           "id": "title",
-          "label": "Event title",
+          "label": "Event Title",
           "default": "Event Name"
         },
         {
           "type": "text",
           "id": "event_date",
-          "label": "Event date",
-          "info": "Format: YYYY-MM-DD"
+          "label": "Event Date",
+          "info": "Format: YYYY-MM-DD (e.g., 2025-12-15)"
         },
         {
           "type": "text",
           "id": "event_time",
-          "label": "Event time",
+          "label": "Event Time",
           "default": "6:00 PM - 8:00 PM"
         },
         {
@@ -171,13 +241,13 @@
         {
           "type": "checkbox",
           "id": "show_rsvp",
-          "label": "Show RSVP button",
+          "label": "Show RSVP Button",
           "default": true
         },
         {
           "type": "url",
           "id": "rsvp_link",
-          "label": "RSVP link"
+          "label": "RSVP Link"
         }
       ]
     }
