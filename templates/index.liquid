@@ -1,0 +1,19 @@
+{% comment %}
+  Homepage Template
+  This template uses sections to build the homepage
+{% endcomment %}
+
+<div id="content">
+  {% section 'hero-surrealist' %}
+  {% section 'manifesto-accordion' %}
+  {% section 'games-showcase' %}
+  {% section 'events-timeline' %}
+  {% section 'invitation-form' %}
+</div>
+
+{% schema %}
+{
+  "name": "Homepage",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,494 @@
+{% comment %}
+  Manifesto Accordion Section
+  Features: Interactive accordion, flip cards for ground rules, values table with SVG connections
+{% endcomment %}
+
+<section class="manifesto-section section bg-deep-blue relative"
+         id="manifesto"
+         data-section-type="manifesto"
+         data-section-id="{{ section.id }}">
+
+  <div class="container-custom">
+
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-hero font-heading font-bold mb-6 gradient-text"
+          data-scroll-reveal>
+        {{ section.settings.heading | default: "Our Manifesto" }}
+      </h2>
+      {% if section.settings.subheading != blank %}
+        <p class="text-xl text-chicago-grey max-w-3xl mx-auto"
+           data-scroll-reveal>
+          {{ section.settings.subheading }}
+        </p>
+      {% endif %}
+    </div>
+
+    <!-- Philosophy Accordion -->
+    <div class="max-w-4xl mx-auto mb-20"
+         x-data="{ openPanel: {{ section.settings.default_open_panel | default: 0 }} }">
+
+      {% for block in section.blocks %}
+        {% if block.type == 'philosophy_panel' %}
+          <div class="accordion-item border-b border-brass/20 mb-4"
+               data-scroll-reveal
+               data-block-id="{{ block.id }}">
+
+            <!-- Accordion Header -->
+            <button @click="openPanel = openPanel === {{ forloop.index0 }} ? null : {{ forloop.index0 }}"
+                    class="w-full flex items-center justify-between py-6 text-left group transition-colors hover:text-brass"
+                    :aria-expanded="openPanel === {{ forloop.index0 }}"
+                    aria-controls="panel-{{ forloop.index0 }}">
+
+              <div class="flex items-center flex-1">
+                <!-- Number indicator -->
+                <span class="text-4xl font-heading font-bold text-brass/30 group-hover:text-brass transition-colors mr-6">
+                  {{ forloop.index | prepend: '0' | slice: -2, 2 }}
+                </span>
+
+                <div>
+                  <h3 class="text-2xl font-heading font-bold mb-2">
+                    {{ block.settings.title }}
+                  </h3>
+                  {% if block.settings.subtitle != blank %}
+                    <p class="text-sm text-chicago-grey">
+                      {{ block.settings.subtitle }}
+                    </p>
+                  {% endif %}
+                </div>
+              </div>
+
+              <!-- Expand icon -->
+              <svg class="w-8 h-8 transform transition-transform duration-300"
+                   :class="openPanel === {{ forloop.index0 }} ? 'rotate-180' : ''"
+                   fill="none"
+                   stroke="currentColor"
+                   viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+
+            <!-- Accordion Content -->
+            <div x-show="openPanel === {{ forloop.index0 }}"
+                 x-collapse
+                 id="panel-{{ forloop.index0 }}"
+                 class="accordion-content pb-8">
+
+              <div class="pl-20 pr-12">
+                <!-- Description -->
+                <div class="prose prose-invert max-w-none mb-6">
+                  {{ block.settings.content }}
+                </div>
+
+                <!-- Quote if exists -->
+                {% if block.settings.quote != blank %}
+                  <blockquote class="border-l-4 border-electric pl-6 my-6">
+                    <p class="font-accent text-xl text-electric italic">
+                      {{ block.settings.quote }}
+                    </p>
+                    {% if block.settings.quote_author != blank %}
+                      <cite class="block mt-3 text-sm text-chicago-grey not-italic">
+                        — {{ block.settings.quote_author }}
+                      </cite>
+                    {% endif %}
+                  </blockquote>
+                {% endif %}
+
+                <!-- Optional image -->
+                {% if block.settings.image != blank %}
+                  <div class="mt-6 rounded-lg overflow-hidden">
+                    {{ block.settings.image | image_url: width: 800 | image_tag:
+                       class: 'w-full h-auto',
+                       loading: 'lazy',
+                       alt: block.settings.title
+                    }}
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <!-- Ground Rules - Flip Cards -->
+    {% if section.settings.show_ground_rules %}
+      <div class="mb-20">
+        <h3 class="text-title font-heading font-bold text-center mb-12 text-brass"
+            data-scroll-reveal>
+          Ground Rules
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {% for block in section.blocks %}
+            {% if block.type == 'ground_rule' %}
+              <div class="flip-card h-64"
+                   data-scroll-reveal
+                   data-block-id="{{ block.id }}">
+
+                <div class="flip-card-inner relative w-full h-full">
+
+                  <!-- Front of card -->
+                  <div class="flip-card-front absolute inset-0 card flex flex-col items-center justify-center text-center p-6">
+                    <!-- Icon -->
+                    {% if block.settings.icon != blank %}
+                      <div class="mb-4 text-brass">
+                        {{ block.settings.icon }}
+                      </div>
+                    {% else %}
+                      <div class="w-16 h-16 rounded-full bg-brass/20 flex items-center justify-center mb-4">
+                        <span class="text-2xl font-heading font-bold text-brass">
+                          {{ forloop.index }}
+                        </span>
+                      </div>
+                    {% endif %}
+
+                    <h4 class="text-lg font-heading font-bold">
+                      {{ block.settings.title }}
+                    </h4>
+                  </div>
+
+                  <!-- Back of card -->
+                  <div class="flip-card-back absolute inset-0 card bg-brass text-midnight flex items-center justify-center p-6">
+                    <p class="text-sm leading-relaxed">
+                      {{ block.settings.description }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+    <!-- Values Table with Connections -->
+    {% if section.settings.show_values %}
+      <div class="max-w-5xl mx-auto">
+        <h3 class="text-title font-heading font-bold text-center mb-12 text-brass"
+            data-scroll-reveal>
+          Our Core Values
+        </h3>
+
+        <div class="relative" id="values-container">
+          <!-- SVG for connection lines -->
+          <svg class="absolute inset-0 w-full h-full pointer-events-none"
+               id="values-svg"
+               style="z-index: 0;">
+          </svg>
+
+          <!-- Values Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+            {% for block in section.blocks %}
+              {% if block.type == 'value' %}
+                <div class="value-item card card-hover text-center p-8"
+                     data-scroll-reveal
+                     data-value-id="value-{{ forloop.index }}"
+                     data-block-id="{{ block.id }}">
+
+                  <!-- Value icon/number -->
+                  <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-brass to-electric flex items-center justify-center">
+                    <span class="text-3xl font-heading font-bold text-midnight">
+                      {{ forloop.index }}
+                    </span>
+                  </div>
+
+                  <h4 class="text-xl font-heading font-bold mb-4">
+                    {{ block.settings.title }}
+                  </h4>
+
+                  <p class="text-chicago-grey text-sm leading-relaxed">
+                    {{ block.settings.description }}
+                  </p>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    <!-- Pull Quote with Surrealist Background -->
+    {% if section.settings.featured_quote != blank %}
+      <div class="mt-20 relative overflow-hidden rounded-2xl"
+           data-scroll-reveal>
+
+        <!-- Background image with overlay -->
+        {% if section.settings.quote_background_image != blank %}
+          <div class="absolute inset-0">
+            {{ section.settings.quote_background_image | image_url: width: 1400 | image_tag:
+               class: 'w-full h-full object-cover',
+               loading: 'lazy'
+            }}
+            <div class="absolute inset-0 bg-midnight/80 backdrop-blur-sm"></div>
+          </div>
+        {% else %}
+          <div class="absolute inset-0 bg-gradient-radial from-dream-purple/20 to-transparent"></div>
+        {% endif %}
+
+        <!-- Quote content -->
+        <div class="relative z-10 py-20 px-12 text-center">
+          <blockquote>
+            <p class="text-3xl md:text-4xl font-accent italic text-electric mb-6">
+              "{{ section.settings.featured_quote }}"
+            </p>
+            {% if section.settings.featured_quote_author != blank %}
+              <cite class="text-brass text-lg not-italic">
+                — {{ section.settings.featured_quote_author }}
+              </cite>
+            {% endif %}
+          </blockquote>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (typeof gsap === 'undefined') return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Scroll reveal animations
+    const revealElements = document.querySelectorAll('[data-scroll-reveal]');
+    revealElements.forEach((el, index) => {
+      gsap.from(el, {
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 80%',
+          toggleActions: 'play none none reverse'
+        },
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        delay: index * 0.1,
+        ease: 'power3.out'
+      });
+    });
+
+    // Draw connection lines between values
+    const drawValueConnections = () => {
+      const svg = document.getElementById('values-svg');
+      const valueItems = document.querySelectorAll('.value-item');
+
+      if (!svg || valueItems.length < 2) return;
+
+      // Clear existing lines
+      svg.innerHTML = '';
+
+      // Draw lines between adjacent values
+      for (let i = 0; i < valueItems.length - 1; i++) {
+        const item1 = valueItems[i];
+        const item2 = valueItems[i + 1];
+
+        const rect1 = item1.getBoundingClientRect();
+        const rect2 = item2.getBoundingClientRect();
+        const containerRect = svg.getBoundingClientRect();
+
+        const x1 = rect1.left + rect1.width / 2 - containerRect.left;
+        const y1 = rect1.top + rect1.height / 2 - containerRect.top;
+        const x2 = rect2.left + rect2.width / 2 - containerRect.left;
+        const y2 = rect2.top + rect2.height / 2 - containerRect.top;
+
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', x1);
+        line.setAttribute('y1', y1);
+        line.setAttribute('x2', x2);
+        line.setAttribute('y2', y2);
+        line.setAttribute('stroke', '#d4af37');
+        line.setAttribute('stroke-width', '1');
+        line.setAttribute('stroke-opacity', '0.2');
+        line.classList.add('connection-line');
+
+        svg.appendChild(line);
+
+        // Animate line drawing
+        gsap.fromTo(line,
+          {
+            strokeDasharray: '5, 5',
+            strokeDashoffset: 1000
+          },
+          {
+            scrollTrigger: {
+              trigger: '.value-item',
+              start: 'top 60%'
+            },
+            strokeDashoffset: 0,
+            duration: 2,
+            ease: 'none'
+          }
+        );
+      }
+    };
+
+    // Draw connections on load and resize
+    setTimeout(drawValueConnections, 500);
+    window.addEventListener('resize', drawValueConnections);
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Manifesto Accordion",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Manifesto"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "range",
+      "id": "default_open_panel",
+      "label": "Default open panel",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Ground Rules"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_ground_rules",
+      "label": "Show ground rules section",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Values"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_values",
+      "label": "Show values section",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Featured Quote"
+    },
+    {
+      "type": "textarea",
+      "id": "featured_quote",
+      "label": "Quote text"
+    },
+    {
+      "type": "text",
+      "id": "featured_quote_author",
+      "label": "Quote author"
+    },
+    {
+      "type": "image_picker",
+      "id": "quote_background_image",
+      "label": "Quote background image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "philosophy_panel",
+      "name": "Philosophy Panel",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Philosophy Title"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle"
+        },
+        {
+          "type": "html",
+          "id": "content",
+          "label": "Content"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote (optional)"
+        },
+        {
+          "type": "text",
+          "id": "quote_author",
+          "label": "Quote author"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image (optional)"
+        }
+      ]
+    },
+    {
+      "type": "ground_rule",
+      "name": "Ground Rule",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Rule Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "html",
+          "id": "icon",
+          "label": "Icon HTML (optional SVG)"
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "name": "Core Value",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Value Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Manifesto Accordion",
+      "blocks": [
+        {
+          "type": "philosophy_panel"
+        },
+        {
+          "type": "philosophy_panel"
+        },
+        {
+          "type": "philosophy_panel"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

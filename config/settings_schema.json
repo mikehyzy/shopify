@@ -1,0 +1,290 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Chicago Futures Salon",
+    "theme_version": "1.0.0",
+    "theme_author": "Custom Theme",
+    "theme_documentation_url": "https://github.com/yourusername/chicago-futures-salon",
+    "theme_support_url": "https://github.com/yourusername/chicago-futures-salon/issues"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Brand Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_midnight",
+        "label": "Midnight",
+        "default": "#0a0a0a"
+      },
+      {
+        "type": "color",
+        "id": "color_deep_blue",
+        "label": "Deep Blue",
+        "default": "#1a1a2e"
+      },
+      {
+        "type": "color",
+        "id": "color_brass",
+        "label": "Brass",
+        "default": "#d4af37"
+      },
+      {
+        "type": "color",
+        "id": "color_electric",
+        "label": "Electric",
+        "default": "#00d4ff"
+      },
+      {
+        "type": "color",
+        "id": "color_dream_purple",
+        "label": "Dream Purple",
+        "default": "#9b4dca"
+      },
+      {
+        "type": "color",
+        "id": "color_chicago_grey",
+        "label": "Chicago Grey",
+        "default": "#6c757d"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Fonts"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_header_font",
+        "label": "Heading font",
+        "default": "assistant_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "label": "Body font",
+        "default": "assistant_n4"
+      }
+    ]
+  },
+  {
+    "name": "Logo",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "min": 50,
+        "max": 300,
+        "step": 10,
+        "unit": "px",
+        "label": "Logo width",
+        "default": 150
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "Will be scaled down to 32x32px"
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social Links"
+      },
+      {
+        "type": "url",
+        "id": "social_twitter_link",
+        "label": "Twitter"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook_link",
+        "label": "Facebook"
+      },
+      {
+        "type": "url",
+        "id": "social_instagram_link",
+        "label": "Instagram"
+      },
+      {
+        "type": "url",
+        "id": "social_linkedin_link",
+        "label": "LinkedIn"
+      }
+    ]
+  },
+  {
+    "name": "Animations",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_animations",
+        "label": "Enable animations",
+        "default": true,
+        "info": "Disable if users report performance issues"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_custom_cursor",
+        "label": "Enable custom cursor (desktop only)",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "animation_speed",
+        "label": "Animation speed",
+        "options": [
+          {
+            "value": "slow",
+            "label": "Slow"
+          },
+          {
+            "value": "normal",
+            "label": "Normal"
+          },
+          {
+            "value": "fast",
+            "label": "Fast"
+          }
+        ],
+        "default": "normal"
+      }
+    ]
+  },
+  {
+    "name": "Announcement Bar",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "announcement_bar_enabled",
+        "label": "Show announcement bar",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "announcement_text",
+        "label": "Announcement text",
+        "default": "Welcome to Chicago Futures Salon"
+      },
+      {
+        "type": "url",
+        "id": "announcement_link",
+        "label": "Announcement link (optional)"
+      },
+      {
+        "type": "color",
+        "id": "announcement_bg_color",
+        "label": "Background color",
+        "default": "#d4af37"
+      },
+      {
+        "type": "color",
+        "id": "announcement_text_color",
+        "label": "Text color",
+        "default": "#0a0a0a"
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart type",
+        "options": [
+          {
+            "value": "page",
+            "label": "Page"
+          },
+          {
+            "value": "drawer",
+            "label": "Drawer"
+          },
+          {
+            "value": "notification",
+            "label": "Notification"
+          }
+        ],
+        "default": "drawer"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_vendor",
+        "label": "Show vendor",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_notes_enable",
+        "label": "Enable cart note",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Search",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "predictive_search_enabled",
+        "label": "Enable predictive search",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "search_show_products",
+        "label": "Show products in search results",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "search_show_articles",
+        "label": "Show articles in search results",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "Checkout",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Checkout Customization"
+      },
+      {
+        "type": "checkbox",
+        "id": "checkout_logo_image",
+        "label": "Use custom logo on checkout",
+        "default": true
+      },
+      {
+        "type": "color",
+        "id": "checkout_accent_color",
+        "label": "Checkout accent color",
+        "default": "#d4af37"
+      },
+      {
+        "type": "color",
+        "id": "checkout_button_color",
+        "label": "Checkout button color",
+        "default": "#d4af37"
+      }
+    ]
+  }
+]

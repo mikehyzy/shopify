@@ -1,0 +1,90 @@
+{
+  "general": {
+    "404": {
+      "title": "Page not found",
+      "subtext": "The page you're looking for doesn't exist."
+    },
+    "meta": {
+      "tags": "Tagged \"{{ tags }}\"",
+      "page": "Page {{ page }}"
+    },
+    "breadcrumbs": {
+      "home": "Home",
+      "back": "Back"
+    },
+    "forms": {
+      "post_error": "Please correct the following:",
+      "required": "Required"
+    },
+    "accessibility": {
+      "refresh_page": "Choosing a selection results in a full page refresh.",
+      "link_messages": {
+        "new_window": "Opens in a new window."
+      },
+      "skip_to_content": "Skip to content"
+    }
+  },
+  "products": {
+    "product": {
+      "sold_out": "Sold Out",
+      "unavailable": "Unavailable",
+      "add_to_cart": "Add to Cart",
+      "quantity": "Quantity",
+      "price": {
+        "from": "From",
+        "regular_price": "Regular price",
+        "sale_price": "Sale price"
+      }
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Your Cart",
+      "empty": "Your cart is empty",
+      "continue_shopping": "Continue Shopping",
+      "remove": "Remove",
+      "update": "Update",
+      "subtotal": "Subtotal",
+      "checkout": "Checkout",
+      "note": "Special instructions"
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "My Account",
+      "details": "Account Details",
+      "view_addresses": "View Addresses",
+      "return": "Return to Account"
+    },
+    "login": {
+      "title": "Login",
+      "email": "Email",
+      "password": "Password",
+      "forgot_password": "Forgot your password?",
+      "sign_in": "Sign In",
+      "cancel": "Return to Store",
+      "create_account": "Create Account"
+    },
+    "orders": {
+      "title": "Order History",
+      "order_number": "Order",
+      "date": "Date",
+      "payment_status": "Payment Status",
+      "fulfillment_status": "Fulfillment Status",
+      "total": "Total",
+      "none": "You haven't placed any orders yet."
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "Menu",
+      "cart": "Cart",
+      "account": "Account"
+    },
+    "footer": {
+      "newsletter": "Newsletter",
+      "email_placeholder": "Your email",
+      "subscribe": "Subscribe"
+    }
+  }
+}

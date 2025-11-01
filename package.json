@@ -1,0 +1,43 @@
+{
+  "name": "chicago-futures-salon-theme",
+  "version": "1.0.0",
+  "description": "Custom Shopify theme for Chicago Futures Salon - an avant-garde community exploring futures thinking",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && npm run build:css",
+    "build:css": "tailwindcss -i ./src/styles/main.css -o ./assets/theme.css --minify",
+    "watch:css": "tailwindcss -i ./src/styles/main.css -o ./assets/theme.css --watch",
+    "preview": "vite preview",
+    "lint": "eslint src --ext .js,.jsx",
+    "format": "prettier --write \"src/**/*.{js,jsx,css,liquid}\""
+  },
+  "keywords": [
+    "shopify",
+    "theme",
+    "futures",
+    "salon",
+    "avant-garde"
+  ],
+  "author": "Chicago Futures Salon",
+  "license": "MIT",
+  "dependencies": {
+    "gsap": "^3.12.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "alpinejs": "^3.13.5",
+    "react-hook-form": "^7.50.1",
+    "swiper": "^11.0.6"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "vite": "^5.1.0",
+    "tailwindcss": "^3.4.1",
+    "postcss": "^8.4.35",
+    "autoprefixer": "^10.4.17",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.11"
+  }
+}

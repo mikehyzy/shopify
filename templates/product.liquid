@@ -1,0 +1,357 @@
+{% comment %}
+  Product Template for Game Cards
+{% endcomment %}
+
+<div class="product-page section bg-midnight">
+  <div class="container-custom">
+
+    <!-- Breadcrumbs -->
+    <nav class="mb-8" aria-label="Breadcrumb">
+      <ol class="flex items-center space-x-2 text-sm text-chicago-grey">
+        <li><a href="/" class="hover:text-white transition-colors">Home</a></li>
+        <li><span class="mx-2">/</span></li>
+        <li><a href="/collections/all" class="hover:text-white transition-colors">Games</a></li>
+        <li><span class="mx-2">/</span></li>
+        <li class="text-white">{{ product.title }}</li>
+      </ol>
+    </nav>
+
+    <!-- Product Content -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+
+      <!-- Product Images -->
+      <div class="product-images" data-fade-in>
+
+        <!-- Main Image -->
+        <div class="mb-4 rounded-lg overflow-hidden bg-deep-blue">
+          {% if product.featured_image %}
+            <img src="{{ product.featured_image | image_url: width: 800 }}"
+                 alt="{{ product.title }}"
+                 id="main-product-image"
+                 class="w-full h-auto">
+          {% else %}
+            <div class="w-full aspect-square flex items-center justify-center">
+              <span class="text-chicago-grey">No image available</span>
+            </div>
+          {% endif %}
+        </div>
+
+        <!-- Thumbnail Gallery -->
+        {% if product.images.size > 1 %}
+          <div class="grid grid-cols-4 gap-4">
+            {% for image in product.images %}
+              <button class="rounded-lg overflow-hidden border-2 transition-colors {% if forloop.first %}border-brass{% else %}border-transparent hover:border-chicago-grey{% endif %}"
+                      onclick="changeMainImage('{{ image | image_url: width: 800 }}', this)">
+                <img src="{{ image | image_url: width: 200 }}"
+                     alt="{{ product.title }} - Image {{ forloop.index }}"
+                     class="w-full h-auto">
+              </button>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Product Info -->
+      <div class="product-info" data-fade-in>
+
+        <!-- Product Title -->
+        <h1 class="text-4xl md:text-5xl font-heading font-bold mb-4">
+          {{ product.title }}
+        </h1>
+
+        <!-- Product Price -->
+        <div class="mb-8">
+          {% if product.compare_at_price > product.price %}
+            <span class="text-chicago-grey line-through text-xl mr-3">
+              {{ product.compare_at_price | money }}
+            </span>
+            <span class="text-electric text-4xl font-heading font-bold">
+              {{ product.price | money }}
+            </span>
+            <span class="ml-3 bg-electric text-midnight px-3 py-1 rounded-full text-sm font-bold uppercase">
+              Save {{ product.compare_at_price | minus: product.price | money }}
+            </span>
+          {% else %}
+            <span class="text-brass text-4xl font-heading font-bold">
+              {{ product.price | money }}
+            </span>
+          {% endif %}
+        </div>
+
+        <!-- Product Description -->
+        <div class="prose prose-invert max-w-none mb-8">
+          {{ product.description }}
+        </div>
+
+        <!-- Product Metafields -->
+        {% if product.metafields.custom.complexity %}
+          <div class="mb-6 pb-6 border-b border-brass/20">
+            <h3 class="text-sm font-heading uppercase tracking-wider text-chicago-grey mb-3">
+              Game Complexity
+            </h3>
+            <div class="flex items-center space-x-1">
+              {% assign complexity = product.metafields.custom.complexity | default: 3 %}
+              {% for i in (1..5) %}
+                <svg class="w-6 h-6 {% if i <= complexity %}text-brass{% else %}text-chicago-grey/30{% endif %}"
+                     fill="currentColor"
+                     viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                </svg>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+
+        <!-- Product Form -->
+        {% form 'product', product, id: 'product-form', class: 'product-form' %}
+
+          <!-- Variant Selector (if multiple variants) -->
+          {% unless product.has_only_default_variant %}
+            <div class="mb-6">
+              <label class="form-label" for="product-select">
+                Select Option
+              </label>
+              <select name="id"
+                      id="product-select"
+                      class="form-input">
+                {% for variant in product.variants %}
+                  <option value="{{ variant.id }}"
+                          {% unless variant.available %}disabled{% endunless %}>
+                    {{ variant.title }} - {{ variant.price | money }}
+                    {% unless variant.available %} (Sold Out){% endunless %}
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+          {% endunless %}
+
+          <!-- Quantity -->
+          <div class="mb-6">
+            <label class="form-label" for="quantity">
+              Quantity
+            </label>
+            <div class="flex items-center space-x-4">
+              <button type="button"
+                      class="w-10 h-10 rounded-lg bg-deep-blue border border-chicago-grey/50 hover:border-brass transition-colors"
+                      onclick="decrementQuantity()">
+                <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
+                </svg>
+              </button>
+
+              <input type="number"
+                     id="quantity"
+                     name="quantity"
+                     value="1"
+                     min="1"
+                     class="form-input text-center w-20">
+
+              <button type="button"
+                      class="w-10 h-10 rounded-lg bg-deep-blue border border-chicago-grey/50 hover:border-brass transition-colors"
+                      onclick="incrementQuantity()">
+                <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Add to Cart Button -->
+          <button type="submit"
+                  name="add"
+                  id="add-to-cart-btn"
+                  class="btn btn-primary w-full mb-4"
+                  {% unless product.available %}disabled{% endunless %}>
+
+            {% if product.available %}
+              <svg class="w-5 h-5 mr-2 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+              </svg>
+              Add to Cart
+            {% else %}
+              Sold Out
+            {% endif %}
+          </button>
+
+          <!-- Buy Now Button (optional) -->
+          {% if product.available %}
+            <button type="button"
+                    class="btn btn-secondary w-full"
+                    onclick="buyNow()">
+              Buy Now
+            </button>
+          {% endif %}
+
+        {% endform %}
+
+        <!-- Additional Info -->
+        <div class="mt-8 space-y-4">
+
+          <!-- Shipping Info -->
+          <div class="flex items-start space-x-3 text-sm">
+            <svg class="w-5 h-5 text-electric mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/>
+            </svg>
+            <div>
+              <p class="font-semibold mb-1">Free Shipping</p>
+              <p class="text-chicago-grey">On orders over $50</p>
+            </div>
+          </div>
+
+          <!-- Returns -->
+          <div class="flex items-start space-x-3 text-sm">
+            <svg class="w-5 h-5 text-electric mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/>
+            </svg>
+            <div>
+              <p class="font-semibold mb-1">Easy Returns</p>
+              <p class="text-chicago-grey">30-day return policy</p>
+            </div>
+          </div>
+
+          <!-- Support -->
+          <div class="flex items-start space-x-3 text-sm">
+            <svg class="w-5 h-5 text-electric mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
+            </svg>
+            <div>
+              <p class="font-semibold mb-1">Customer Support</p>
+              <p class="text-chicago-grey">We're here to help</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Products -->
+    {% if product.collections.first.products.size > 1 %}
+      <div class="related-products">
+        <h2 class="text-title font-heading font-bold mb-8 text-center">
+          You May Also Like
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          {% for related_product in product.collections.first.products limit: 3 %}
+            {% unless related_product.id == product.id %}
+              <a href="{{ related_product.url }}"
+                 class="card card-hover block p-6 group"
+                 data-fade-in>
+
+                {% if related_product.featured_image %}
+                  <img src="{{ related_product.featured_image | image_url: width: 400 }}"
+                       alt="{{ related_product.title }}"
+                       class="w-full aspect-square object-cover rounded-lg mb-4 group-hover:scale-105 transition-transform duration-500">
+                {% endif %}
+
+                <h3 class="font-heading font-bold mb-2 group-hover:text-brass transition-colors">
+                  {{ related_product.title }}
+                </h3>
+
+                <p class="text-brass font-heading font-semibold">
+                  {{ related_product.price | money }}
+                </p>
+              </a>
+            {% endunless %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+  // Change main product image
+  function changeMainImage(imageSrc, button) {
+    document.getElementById('main-product-image').src = imageSrc;
+
+    // Update active state
+    document.querySelectorAll('.product-images button').forEach(btn => {
+      btn.classList.remove('border-brass');
+      btn.classList.add('border-transparent');
+    });
+    button.classList.add('border-brass');
+    button.classList.remove('border-transparent');
+  }
+
+  // Quantity controls
+  function incrementQuantity() {
+    const input = document.getElementById('quantity');
+    input.value = parseInt(input.value) + 1;
+  }
+
+  function decrementQuantity() {
+    const input = document.getElementById('quantity');
+    if (parseInt(input.value) > 1) {
+      input.value = parseInt(input.value) - 1;
+    }
+  }
+
+  // Buy Now functionality
+  async function buyNow() {
+    const form = document.getElementById('product-form');
+    const formData = new FormData(form);
+
+    try {
+      // Add to cart
+      const response = await fetch('/cart/add.js', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (response.ok) {
+        // Redirect to checkout
+        window.location.href = '/checkout';
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Something went wrong. Please try again.');
+    }
+  }
+
+  // Handle add to cart
+  document.getElementById('product-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const btn = document.getElementById('add-to-cart-btn');
+    const originalText = btn.innerHTML;
+
+    btn.innerHTML = '<div class="spinner mx-auto"></div>';
+    btn.disabled = true;
+
+    try {
+      const formData = new FormData(this);
+      const response = await fetch('/cart/add.js', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (response.ok) {
+        // Update cart count
+        const cartResponse = await fetch('/cart.js');
+        const cart = await cartResponse.json();
+
+        document.querySelectorAll('[x-text="cartCount"]').forEach(el => {
+          el.textContent = cart.item_count;
+        });
+
+        // Show success
+        btn.innerHTML = '✓ Added to Cart!';
+        btn.classList.add('bg-electric');
+
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.classList.remove('bg-electric');
+          btn.disabled = false;
+        }, 2000);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      btn.innerHTML = 'Error - Try Again';
+
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }, 2000);
+    }
+  });
+</script>

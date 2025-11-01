@@ -1,0 +1,74 @@
+{%- comment -%}
+  Structured Data (Schema.org JSON-LD) for SEO
+{%- endcomment -%}
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": {{ shop.name | json }},
+  "url": {{ request.origin | append: page.url | json }},
+  {% if settings.logo %}
+    "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
+  {% endif %}
+  "description": {{ shop.description | json }},
+  "sameAs": [
+    {{ settings.social_twitter_link | json }},
+    {{ settings.social_facebook_link | json }},
+    {{ settings.social_instagram_link | json }}
+  ]
+}
+</script>
+
+{%- if template contains 'product' -%}
+  <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Product",
+    "name": {{ product.title | json }},
+    "description": {{ product.description | strip_html | json }},
+    "url": {{ request.origin | append: product.url | json }},
+    {% if product.featured_image %}
+      "image": {{ product.featured_image | image_url: width: 1200 | prepend: "https:" | json }},
+    {% endif %}
+    "brand": {
+      "@type": "Brand",
+      "name": {{ shop.name | json }}
+    },
+    {% if product.variants.first.sku != blank %}
+      "sku": {{ product.variants.first.sku | json }},
+    {% endif %}
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": {{ cart.currency.iso_code | json }},
+      "price": {{ product.price | divided_by: 100.0 | json }},
+      "url": {{ request.origin | append: product.url | json }},
+      "availability": "{% if product.available %}http://schema.org/InStock{% else %}http://schema.org/OutOfStock{% endif %}"
+    }
+  }
+  </script>
+{%- endif -%}
+
+{%- if template == 'article' -%}
+  <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": {{ article.title | json }},
+    "articleBody": {{ article.content | strip_html | json }},
+    {% if article.image %}
+      "image": {{ article.image | image_url: width: 1200 | prepend: "https:" | json }},
+    {% endif %}
+    "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+    "dateModified": {{ article.updated_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+    "author": {
+      "@type": "Person",
+      "name": {{ article.author | json }}
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": {{ shop.name | json }}
+    }
+  }
+  </script>
+{%- endif -%}
