@@ -1,0 +1,158 @@
+/**
+ * Chicago Futures Salon Theme - Styles
+ * This is a placeholder. Run 'npm run build:css' to generate the full Tailwind CSS
+ */
+
+/* CSS Variables */
+:root {
+  --color-midnight: #0a0a0a;
+  --color-deep-blue: #1a1a2e;
+  --color-brass: #d4af37;
+  --color-electric: #00d4ff;
+  --color-dream-purple: #9b4dca;
+  --color-chicago-grey: #6c757d;
+}
+
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Crimson Text', Georgia, serif;
+  background-color: var(--color-midnight);
+  color: #ffffff;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* Utility Classes */
+.container-custom {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section {
+  padding: 5rem 0;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 1rem 2rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s;
+  cursor: pointer;
+  border: none;
+  border-radius: 0.5rem;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: var(--color-brass);
+  color: var(--color-midnight);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+}
+
+.btn-secondary {
+  border: 2px solid var(--color-electric);
+  color: var(--color-electric);
+  background: transparent;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-electric);
+  color: var(--color-midnight);
+}
+
+/* Cards */
+.card {
+  background-color: var(--color-deep-blue);
+  padding: 2rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(108, 117, 125, 0.3);
+}
+
+.card-hover {
+  transition: all 0.5s;
+}
+
+.card-hover:hover {
+  border-color: var(--color-brass);
+  transform: translateY(-0.5rem);
+}
+
+/* Forms */
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: var(--color-deep-blue);
+  border: 1px solid rgba(108, 117, 125, 0.5);
+  color: #ffffff;
+  border-radius: 0.5rem;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-brass);
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+
+@media (max-width: 768px) {
+  .grid-cols-2, .grid-cols-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Text Colors */
+.text-brass { color: var(--color-brass); }
+.text-electric { color: var(--color-electric); }
+.text-chicago-grey { color: var(--color-chicago-grey); }
+
+.gradient-text {
+  background: linear-gradient(to right, var(--color-brass), var(--color-electric), var(--color-dream-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Visibility */
+.hidden { display: none; }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* NOTE: This is a minimal stylesheet. Run 'npm run build:css' to generate the full Tailwind CSS with all utilities. */

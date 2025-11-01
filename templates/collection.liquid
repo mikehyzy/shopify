@@ -1,0 +1,168 @@
+{% comment %}
+  Collection Template
+{% endcomment %}
+
+<div class="collection-page section bg-midnight">
+  <div class="container-custom">
+
+    <!-- Collection Header -->
+    <div class="text-center mb-12">
+      <h1 class="text-hero font-heading font-bold mb-4 gradient-text">
+        {{ collection.title }}
+      </h1>
+
+      {% if collection.description != blank %}
+        <div class="prose prose-invert max-w-3xl mx-auto">
+          {{ collection.description }}
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Filter/Sort Bar -->
+    <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+
+      <p class="text-chicago-grey">
+        {{ collection.products_count }}
+        {% if collection.products_count == 1 %}product{% else %}products{% endif %}
+      </p>
+
+      <!-- Sort Dropdown -->
+      <div x-data="{ sortOpen: false }" class="relative">
+        <label for="sort-by" class="sr-only">Sort by</label>
+        <select id="sort-by"
+                class="form-input"
+                onchange="window.location.href = this.value">
+          <option value="{{ collection.url }}?sort_by=manual">Featured</option>
+          <option value="{{ collection.url }}?sort_by=best-selling" {% if collection.sort_by == 'best-selling' %}selected{% endif %}>Best Selling</option>
+          <option value="{{ collection.url }}?sort_by=title-ascending" {% if collection.sort_by == 'title-ascending' %}selected{% endif %}>A-Z</option>
+          <option value="{{ collection.url }}?sort_by=title-descending" {% if collection.sort_by == 'title-descending' %}selected{% endif %}>Z-A</option>
+          <option value="{{ collection.url }}?sort_by=price-ascending" {% if collection.sort_by == 'price-ascending' %}selected{% endif %}>Price: Low to High</option>
+          <option value="{{ collection.url }}?sort_by=price-descending" {% if collection.sort_by == 'price-descending' %}selected{% endif %}>Price: High to Low</option>
+          <option value="{{ collection.url }}?sort_by=created-descending" {% if collection.sort_by == 'created-descending' %}selected{% endif %}>Newest</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Products Grid -->
+    {% if collection.products.size > 0 %}
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        {% for product in collection.products %}
+
+          <div class="product-card card card-hover p-6 group"
+               data-fade-in>
+
+            <!-- Product Image -->
+            <a href="{{ product.url }}" class="block mb-4">
+              {% if product.featured_image %}
+                <div class="aspect-square overflow-hidden rounded-lg mb-4">
+                  <img src="{{ product.featured_image | image_url: width: 600 }}"
+                       alt="{{ product.title }}"
+                       loading="lazy"
+                       class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+              {% else %}
+                <div class="aspect-square bg-deep-blue rounded-lg mb-4 flex items-center justify-center">
+                  <span class="text-chicago-grey">No image</span>
+                </div>
+              {% endif %}
+
+              <!-- Badges -->
+              {% if product.compare_at_price > product.price %}
+                <div class="absolute top-4 right-4 bg-electric text-midnight px-3 py-1 rounded-full text-xs font-heading font-bold uppercase">
+                  Sale
+                </div>
+              {% endif %}
+            </a>
+
+            <!-- Product Info -->
+            <h3 class="text-xl font-heading font-bold mb-2">
+              <a href="{{ product.url }}" class="hover:text-brass transition-colors">
+                {{ product.title }}
+              </a>
+            </h3>
+
+            {% if product.description != blank %}
+              <p class="text-sm text-chicago-grey mb-4 line-clamp-2">
+                {{ product.description | strip_html | truncate: 100 }}
+              </p>
+            {% endif %}
+
+            <!-- Price -->
+            <div class="mb-4">
+              {% if product.compare_at_price > product.price %}
+                <span class="text-chicago-grey line-through text-sm mr-2">
+                  {{ product.compare_at_price | money }}
+                </span>
+                <span class="text-electric text-xl font-heading font-bold">
+                  {{ product.price | money }}
+                </span>
+              {% else %}
+                <span class="text-brass text-xl font-heading font-bold">
+                  {{ product.price | money }}
+                </span>
+              {% endif %}
+            </div>
+
+            <!-- View Product Button -->
+            <a href="{{ product.url }}"
+               class="btn btn-ghost w-full text-sm">
+              View Details
+            </a>
+          </div>
+
+        {% endfor %}
+      </div>
+
+      <!-- Pagination -->
+      {% if paginate.pages > 1 %}
+        <nav class="pagination flex justify-center items-center gap-4">
+
+          {% if paginate.previous %}
+            <a href="{{ paginate.previous.url }}"
+               class="btn btn-ghost">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+              </svg>
+              Previous
+            </a>
+          {% endif %}
+
+          <span class="text-chicago-grey">
+            Page {{ paginate.current_page }} of {{ paginate.pages }}
+          </span>
+
+          {% if paginate.next %}
+            <a href="{{ paginate.next.url }}"
+               class="btn btn-ghost">
+              Next
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          {% endif %}
+        </nav>
+      {% endif %}
+
+    {% else %}
+
+      <!-- Empty Collection -->
+      <div class="text-center py-16">
+        <p class="text-xl text-chicago-grey mb-8">
+          No products in this collection yet.
+        </p>
+        <a href="/" class="btn btn-primary">
+          Return Home
+        </a>
+      </div>
+
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection",
+  "settings": []
+}
+{% endschema %}

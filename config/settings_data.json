@@ -1,0 +1,32 @@
+{
+  "current": {
+    "color_midnight": "#0a0a0a",
+    "color_deep_blue": "#1a1a2e",
+    "color_brass": "#d4af37",
+    "color_electric": "#00d4ff",
+    "color_dream_purple": "#9b4dca",
+    "color_chicago_grey": "#6c757d",
+    "enable_animations": true,
+    "enable_custom_cursor": true,
+    "animation_speed": "normal",
+    "announcement_bar_enabled": false,
+    "announcement_text": "Welcome to Chicago Futures Salon",
+    "cart_type": "drawer",
+    "predictive_search_enabled": true,
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "menu": "main-menu"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "footer_menu": "footer",
+          "show_payment_icons": true
+        }
+      }
+    }
+  }
+}
