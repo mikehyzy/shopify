@@ -15,11 +15,29 @@
         "quote_author": "André Breton"
       }
     },
+    "manifesto": {
+      "type": "manifesto-accordion",
+      "settings": {
+        "heading": "Our Manifesto",
+        "subheading": "The principles that guide our exploration of possible futures",
+        "show_ground_rules": true,
+        "show_values": true
+      }
+    },
     "games": {
       "type": "games-showcase",
       "settings": {
         "heading": "Future-Thinking Games",
         "subheading": "Explore our collection of card games designed to unlock futures thinking"
+      }
+    },
+    "events": {
+      "type": "events-timeline",
+      "settings": {
+        "heading": "Upcoming Events",
+        "subheading": "Join us for intimate gatherings exploring the future",
+        "show_filters": true,
+        "show_past_events_link": true
       }
     },
     "invitation": {
@@ -35,7 +53,9 @@
   },
   "order": [
     "hero",
+    "manifesto",
     "games",
+    "events",
     "invitation"
   ]
 }

@@ -10,17 +10,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        midnight: '#0a0a0a',
-        'deep-blue': '#1a1a2e',
+        midnight: '#000000',
+        'deep-blue': '#000000',
         brass: '#d4af37',
         electric: '#00d4ff',
         'dream-purple': '#9b4dca',
         'chicago-grey': '#6c757d',
       },
       fontFamily: {
-        heading: ['Futura PT', 'Montserrat', 'sans-serif'],
-        body: ['Crimson Text', 'Georgia', 'serif'],
-        accent: ['Dancing Script', 'cursive'],
+        heading: ['Open Sans', 'sans-serif'],
+        body: ['Open Sans', 'sans-serif'],
+        accent: ['Open Sans', 'sans-serif'],
       },
       fontSize: {
         'display': 'clamp(3rem, 8vw, 6rem)',

@@ -4,8 +4,8 @@
 
 /* Custom CSS Variables */
 :root {
-  --color-midnight: #0a0a0a;
-  --color-deep-blue: #1a1a2e;
+  --color-midnight: #000000;
+  --color-deep-blue: #000000;
   --color-brass: #d4af37;
   --color-electric: #00d4ff;
   --color-dream-purple: #9b4dca;
@@ -15,21 +15,15 @@
   --max-width: 1400px;
 
   /* Typography */
-  --font-heading: 'Futura PT', 'Montserrat', sans-serif;
-  --font-body: 'Crimson Text', 'Georgia', serif;
-  --font-accent: 'Dancing Script', cursive;
+  --font-heading: 'Open Sans', sans-serif;
+  --font-body: 'Open Sans', sans-serif;
+  --font-accent: 'Open Sans', sans-serif;
 }
 
 @layer base {
-  /* Custom font imports */
-  @font-face {
-    font-family: 'Futura PT';
-    src: url('https://fonts.cdnfonts.com/css/futura-pt') format('woff2');
-    font-display: swap;
-  }
-
   body {
-    @apply font-body bg-midnight text-white antialiased;
+    @apply font-body text-white antialiased;
+    background-color: #000000;
     overflow-x: hidden;
   }
 
