@@ -76,9 +76,9 @@
         </div>
 
         <!-- View All Button -->
-        {% if section.settings.show_view_all and collection.products.size > section.settings.products_to_show %}
+        {% if section.settings.show_view_all %}
           <div style="text-align: center; margin-top: 3rem;">
-            <a href="{{ collection.url }}" class="view-all-btn" style="display: inline-block; padding: 1rem 2.5rem; background-color: transparent; color: #ffffff; text-decoration: none; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; border: 2px solid #ffffff; transition: all 0.3s;">
+            <a href="/collections/all" class="view-all-btn" style="display: inline-block; padding: 1rem 2.5rem; background-color: transparent; color: #ffffff; text-decoration: none; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; border: 2px solid #ffffff; transition: all 0.3s;">
               View all Provocations
             </a>
           </div>
@@ -122,6 +122,15 @@
       <p class="text-center" style="color: #ffffff; opacity: 0.5; margin-top: 2rem; font-size: 0.875rem;">
         Select a collection in the theme customizer to display your products
       </p>
+
+      <!-- View All Button for Sample Products -->
+      {% if section.settings.show_view_all %}
+        <div style="text-align: center; margin-top: 2rem;">
+          <a href="/collections/all" class="view-all-btn" style="display: inline-block; padding: 1rem 2.5rem; background-color: transparent; color: #ffffff; text-decoration: none; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; border: 2px solid #ffffff; transition: all 0.3s;">
+            View all Provocations
+          </a>
+        </div>
+      {% endif %}
     {% endif %}
 
   </div>
