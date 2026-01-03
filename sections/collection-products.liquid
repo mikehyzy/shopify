@@ -1,0 +1,147 @@
+{% comment %}
+  Collection Products Grid
+{% endcomment %}
+
+<section style="background-color: #000000; padding: 40px 0 80px 0;">
+  <div class="container-custom" style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
+
+    {% paginate collection.products by 12 %}
+
+      {% if collection.products.size > 0 %}
+        <!-- Products Grid -->
+        <div class="products-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; justify-items: center; max-width: 1200px; margin: 0 auto;">
+          {% for product in collection.products %}
+            <div class="product-card" style="border: 1px solid rgba(255, 255, 255, 0.2); background-color: #0a0a0a; overflow: hidden; transition: all 0.3s; width: 100%; max-width: 400px;">
+
+              <!-- Product Image -->
+              {% if product.featured_image %}
+                <a href="{{ product.url }}" style="display: block; overflow: hidden;">
+                  <img src="{{ product.featured_image | image_url: width: 600 }}"
+                       alt="{{ product.title | escape }}"
+                       style="width: 100%; aspect-ratio: 4/3; object-fit: cover; transition: transform 0.3s;"
+                       loading="lazy"
+                       class="product-image">
+                </a>
+              {% else %}
+                <div style="width: 100%; aspect-ratio: 4/3; background-color: #1a1a1a; display: flex; align-items: center; justify-content: center;">
+                  <svg style="width: 48px; height: 48px; opacity: 0.3;" fill="none" stroke="white" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                  </svg>
+                </div>
+              {% endif %}
+
+              <!-- Product Info -->
+              <div style="padding: 1.5rem;">
+                <h3 style="font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 1.25rem; margin-bottom: 0.5rem;">
+                  <a href="{{ product.url }}" style="color: #ffffff; text-decoration: none; transition: opacity 0.2s;">
+                    {{ product.title }}
+                  </a>
+                </h3>
+
+                {% if product.description != blank %}
+                  <p style="color: #ffffff; opacity: 0.7; font-size: 0.875rem; line-height: 1.6; margin-bottom: 1rem;">
+                    {{ product.description | strip_html | truncatewords: 20 }}
+                  </p>
+                {% endif %}
+
+                <!-- Price and Button -->
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 1rem;">
+                  <span class="product-price" style="color: #ffffff; font-size: 1.5rem; font-weight: 700;">
+                    {{ product.price | money }}
+                  </span>
+                  <a href="{{ product.url }}" class="product-btn" style="display: inline-block; padding: 0.75rem 1.5rem; background-color: #ffffff; color: #000000; text-decoration: none; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; border: 2px solid #ffffff; transition: all 0.3s;">
+                    View →
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        {% if paginate.pages > 1 %}
+          <div style="margin-top: 4rem; text-align: center;">
+            <div style="display: inline-flex; gap: 0.5rem; align-items: center;">
+              {% if paginate.previous %}
+                <a href="{{ paginate.previous.url }}" style="padding: 0.75rem 1.5rem; border: 1px solid rgba(255, 255, 255, 0.3); color: #ffffff; text-decoration: none; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 0.875rem; transition: all 0.3s;">
+                  ← Previous
+                </a>
+              {% endif %}
+
+              <span style="color: #ffffff; padding: 0 1rem; font-size: 0.875rem;">
+                Page {{ paginate.current_page }} of {{ paginate.pages }}
+              </span>
+
+              {% if paginate.next %}
+                <a href="{{ paginate.next.url }}" style="padding: 0.75rem 1.5rem; border: 1px solid rgba(255, 255, 255, 0.3); color: #ffffff; text-decoration: none; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 0.875rem; transition: all 0.3s;">
+                  Next →
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+
+      {% else %}
+        <!-- Empty State -->
+        <div style="text-align: center; padding: 4rem 2rem;">
+          <p style="color: #ffffff; font-size: 1.25rem; margin-bottom: 1rem;">
+            No products found in this collection.
+          </p>
+          <a href="/" style="display: inline-block; padding: 1rem 2rem; background-color: #ffffff; color: #000000; text-decoration: none; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; border: 2px solid #ffffff; transition: all 0.3s; margin-top: 1rem;">
+            Back to Home
+          </a>
+        </div>
+      {% endif %}
+
+    {% endpaginate %}
+
+  </div>
+</section>
+
+<style>
+  .products-grid {
+    padding: 0 1rem;
+  }
+
+  .product-card:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-4px);
+  }
+
+  .product-card:hover .product-image {
+    transform: scale(1.05);
+  }
+
+  .product-btn:hover {
+    background-color: #000000;
+    color: #ffffff;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 640px) {
+    .products-grid {
+      grid-template-columns: 1fr !important;
+      gap: 1.5rem;
+      padding: 0 0.5rem;
+    }
+
+    .product-card {
+      max-width: 100% !important;
+    }
+  }
+
+  @media (min-width: 641px) and (max-width: 1024px) {
+    .products-grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+      gap: 1.5rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Collection Products",
+  "settings": []
+}
+{% endschema %}
