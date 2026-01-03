@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -61,9 +70,10 @@
     "games": {
       "type": "games-showcase",
       "settings": {
-        "heading": "Future-Thinking Games",
-        "subheading": "Explore our collection of card games designed to unlock futures thinking",
-        "products_to_show": 6,
+        "heading": "Future-Thinking Provocations",
+        "subheading": "Explore our collection of creative provactions designed to unlock futures thinking",
+        "collection": "frontpage",
+        "products_to_show": 3,
         "show_view_all": true
       }
     },
