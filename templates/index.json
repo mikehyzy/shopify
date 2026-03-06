@@ -74,41 +74,90 @@
         "subheading": "Explore our collection of creative provactions designed to unlock futures thinking",
         "collection": "frontpage",
         "products_to_show": 3,
-        "show_view_all": true
+        "show_view_all": true,
+        "view_all_url": "shopify://collections/all"
       }
     },
     "events": {
       "type": "events-timeline",
       "blocks": {
+        "event_WMhAcT": {
+          "type": "event",
+          "settings": {
+            "title": "March Monthly Salon",
+            "event_date": "2026-03-12",
+            "event_time": "5:00 PM - 8:00 PM",
+            "location": "The telephone booth on 14th Street. Ask for Gerald. There is no Gerald.",
+            "description": "The ice is cracking and so is the consensus. We meet in a secret location to perform surgery on the calendar itself. March is the month that pretends to be an ending but is actually a wound reopening. Bring your instruments.",
+            "show_rsvp": true,
+            "rsvp_link": "https://forms.gle/Lvme7zTYak9dRDxV8"
+          }
+        },
+        "event_QDYbxM": {
+          "type": "event",
+          "settings": {
+            "title": "April Monthly Salon",
+            "event_date": "20206-04-09",
+            "event_time": "5:00 PM - 8:00 PM",
+            "location": "A basement that doesn't appear on any blueprint. Turn left where the street stops making sense. You'll know it by the smell of burnt futures.",
+            "description": "The city is lying to you about spring. We gather at an undisclosed address to interrogate the false promises of renewal and build better ones from stolen parts. April is a forger's month and we are its apprentices. Nothing blooms without a conspiracy.",
+            "show_rsvp": true,
+            "rsvp_link": "https://forms.gle/Lvme7zTYak9dRDxV8"
+          }
+        },
+        "event_REtXzH": {
+          "type": "event",
+          "settings": {
+            "title": "May Monthly Salon",
+            "event_date": "2026-05-14",
+            "event_time": "6:00 PM - 8:00 PM",
+            "location": "Behind the third door of a building with only two doors.",
+            "description": "The air softens and the surveillance relaxes. We convene somewhere you won't expect to dismantle the future and reassemble it without the instruction manual. May is when the serious people stop paying attention. That is when we do our best work.",
+            "show_rsvp": true,
+            "rsvp_link": "https://forms.gle/Lvme7zTYak9dRDxV8"
+          }
+        },
+        "event_jbfMLe": {
+          "type": "event",
+          "settings": {
+            "title": "THE SPECTACLE",
+            "event_date": "2026-05-21",
+            "event_time": "3:00 PM - 7:00 PM",
+            "location": "Industrious Loop Location",
+            "description": "Two hundred people in an industrial cathedral. Sponsors who bet on the strange. Guests who refuse to spectate. This is not a conference. This is not a networking event. This is a springtime detonation of everything we've been building in secret since the telephone booth on 14th Street.\n\nTHE SPECTACLE is Chicago Futures Salon at full volume. Experiential, immersive, ungovernable. Expect provocations, collaborations, performances, and at least one thing nobody planned. Spring doesn't ask permission and neither do we.\n\nHosted at Industrious. Doors open once. Bring someone who isn't ready.",
+            "show_rsvp": true,
+            "rsvp_link": ""
+          }
+        },
         "event-1": {
           "type": "event",
           "settings": {
-            "title": "Futures Salon: Chicago 2050",
-            "event_date": "2025-12-15",
-            "event_time": "6:00 PM - 9:00 PM",
-            "location": "Private Location - Chicago",
-            "description": "Join us for an evening exploring possible futures for Chicago through scenario planning, creative games, and futures mapping exercises. Limited to 20 participants.",
+            "title": "June Monthly Salon",
+            "event_date": "2026-06-11",
+            "event_time": "5:00 PM - 7:00 PM",
+            "location": "Latitude and longitude will be tattooed on a pigeon released from Union Station at noon. Follow it or don't. The pigeon doesn't care. Neither do we.",
+            "description": "The longest light of the year exposes what the shorter days kept hidden. We occupy a secret room to read the city's dreams aloud and rewrite the ones that bore us. June is an open nerve and a dare. The solstice belongs to those who show up.",
             "show_rsvp": true,
-            "rsvp_link": "#invitation"
+            "rsvp_link": "https://forms.gle/Lvme7zTYak9dRDxV8"
           }
         },
         "event-2": {
           "type": "event",
           "settings": {
-            "title": "Surrealist Methods Workshop",
-            "event_date": "2026-01-22",
-            "event_time": "7:00 PM - 10:00 PM",
-            "location": "TBD",
-            "description": "Explore Surrealist creative techniques adapted for futures thinking and strategic foresight. Hands-on workshop with experimental exercises.",
+            "title": "July Monthly Meetup",
+            "event_date": "2026-07-09",
+            "event_time": "5:00 PM - 7:00 PM",
+            "location": "An ice cream truck that doesn't sell ice cream, parked where an ice cream truck has no business being. The password is your mother's least favorite word.",
+            "description": "The heat makes thought liquid. We meet somewhere cool and unnamed to pour it into new shapes before it evaporates. July is the month the future sweats through its disguise. Come see what it looks like underneath.",
             "show_rsvp": true,
-            "rsvp_link": "#invitation"
+            "rsvp_link": "https://forms.gle/Lvme7zTYak9dRDxV8"
           }
         },
         "event-3": {
           "type": "event",
           "settings": {
             "title": "Futures Gaming Night",
-            "event_date": "2026-02-10",
+            "event_date": "2026-08-10",
             "event_time": "6:30 PM - 9:30 PM",
             "location": "Private Location - Chicago",
             "description": "An evening of futures-oriented card games and strategic scenarios. Bring your curiosity and imagination.",
@@ -118,6 +167,10 @@
         }
       },
       "block_order": [
+        "event_WMhAcT",
+        "event_QDYbxM",
+        "event_REtXzH",
+        "event_jbfMLe",
         "event-1",
         "event-2",
         "event-3"
