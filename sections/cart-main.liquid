@@ -1,0 +1,168 @@
+{% comment %}
+  Cart Main Section
+{% endcomment %}
+
+<div class="cart-page section" style="background-color: #000000; padding: 40px 0;">
+  <div class="container-custom" style="max-width: 56rem; margin: 0 auto; padding: 0 2rem;">
+
+    <h1 style="font-size: clamp(2rem, 5vw, 4rem); font-family: 'Open Sans', sans-serif; font-weight: 700; color: #ffffff; margin-bottom: 2rem; text-align: center;">
+      Your Cart
+    </h1>
+
+    {% if cart.item_count > 0 %}
+
+      <!-- Cart Items -->
+      <form action="/cart" method="post" style="margin-bottom: 2rem;">
+
+        <div style="margin-bottom: 2rem;">
+          {% for item in cart.items %}
+            <div class="cart-item" style="border: 1px solid rgba(255, 255, 255, 0.2); background-color: #0a0a0a; padding: 1.5rem; display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; border-radius: 0.5rem;">
+
+              <!-- Product Image -->
+              {% if item.image %}
+                <a href="{{ item.url }}" style="flex-shrink: 0;">
+                  <img src="{{ item.image | image_url: width: 150 }}"
+                       alt="{{ item.title | escape }}"
+                       style="width: 6rem; height: 6rem; object-fit: cover; border-radius: 0.5rem;">
+                </a>
+              {% endif %}
+
+              <!-- Product Info -->
+              <div style="flex: 1 1 0%;">
+                <h3 style="font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 1.125rem; margin-bottom: 0.5rem; color: #ffffff;">
+                  <a href="{{ item.url }}" style="color: #ffffff; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#d4af37'" onmouseout="this.style.color='#ffffff'">
+                    {{ item.product.title }}
+                  </a>
+                </h3>
+
+                {% unless item.variant.title contains 'Default' %}
+                  <p style="font-size: 0.875rem; color: #6c757d; margin-bottom: 0.5rem;">
+                    {{ item.variant.title }}
+                  </p>
+                {% endunless %}
+
+                <p style="color: #ffffff; font-family: 'Open Sans', sans-serif; font-weight: 600;">
+                  {{ item.final_price | money }}
+                </p>
+              </div>
+
+              <!-- Quantity -->
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <label for="updates_{{ item.key }}" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border-width: 0;">Quantity</label>
+                <input type="number"
+                       name="updates[]"
+                       id="updates_{{ item.key }}"
+                       value="{{ item.quantity }}"
+                       min="0"
+                       style="width: 5rem; padding: 0.75rem 1rem; background-color: #0a0a0a; border: 1px solid rgba(255, 255, 255, 0.3); color: #ffffff; border-radius: 0.5rem; text-align: center; font-family: 'Open Sans', sans-serif;">
+              </div>
+
+              <!-- Line Total -->
+              <div style="text-align: right;">
+                <p style="font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 1.25rem; color: #ffffff;">
+                  {{ item.final_line_price | money }}
+                </p>
+              </div>
+
+              <!-- Remove -->
+              <a href="/cart/change?line={{ forloop.index }}&quantity=0"
+                 style="color: #6c757d; text-decoration: none; transition: color 0.2s;"
+                 onmouseover="this.style.color='#00d4ff'"
+                 onmouseout="this.style.color='#6c757d'"
+                 aria-label="Remove {{ item.title | escape }}">
+                <svg style="width: 1.5rem; height: 1.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+
+        <!-- Cart Note -->
+        <div style="margin-bottom: 2rem;">
+          <label for="note" style="display: block; font-family: 'Open Sans', sans-serif; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; color: #6c757d;">Order Notes (Optional)</label>
+          <textarea name="note"
+                    id="note"
+                    rows="3"
+                    placeholder="Special instructions or gift message"
+                    style="width: 100%; padding: 0.75rem 1rem; background-color: #0a0a0a; border: 1px solid rgba(255, 255, 255, 0.3); color: #ffffff; border-radius: 0.5rem; font-family: 'Open Sans', sans-serif; resize: vertical;">{{ cart.note }}</textarea>
+        </div>
+
+        <!-- Update Cart Button -->
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <button type="submit" name="update" style="padding: 1rem 2rem; background-color: transparent; color: #ffffff; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.025em; border: 2px solid #ffffff; transition: all 0.3s; cursor: pointer; border-radius: 0;">
+            Update Cart
+          </button>
+        </div>
+      </form>
+
+      <!-- Cart Summary -->
+      <div style="border: 1px solid rgba(255, 255, 255, 0.2); background-color: #0a0a0a; padding: 2rem; border-radius: 0.5rem;">
+        <div style="margin-bottom: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; font-size: 1.125rem; margin-bottom: 1rem;">
+            <span style="color: #6c757d;">Subtotal</span>
+            <span style="font-family: 'Open Sans', sans-serif; font-weight: 700; color: #ffffff;">{{ cart.total_price | money }}</span>
+          </div>
+
+          <p style="font-size: 0.875rem; color: #6c757d;">
+            Shipping and taxes calculated at checkout
+          </p>
+        </div>
+
+        <a href="/checkout" style="display: block; width: 100%; padding: 1rem 2rem; background-color: #ffffff; color: #000000; text-decoration: none; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.025em; border: 2px solid #ffffff; transition: all 0.3s; margin-bottom: 1rem; text-align: center; border-radius: 0;">
+          Proceed to Checkout
+        </a>
+
+        <a href="/collections/all" style="display: block; text-align: center; color: #00d4ff; text-decoration: none; transition: text-decoration 0.2s;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
+          Continue Shopping
+        </a>
+      </div>
+
+    {% else %}
+
+      <!-- Empty Cart -->
+      <div style="text-align: center; padding: 4rem 2rem;">
+        <svg style="width: 6rem; height: 6rem; margin: 0 auto 1.5rem auto; color: #6c757d;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+        </svg>
+
+        <h2 style="font-size: 1.5rem; font-family: 'Open Sans', sans-serif; font-weight: 700; color: #ffffff; margin-bottom: 1rem;">
+          Your cart is empty
+        </h2>
+
+        <p style="color: #6c757d; margin-bottom: 2rem;">
+          Looks like you haven't added any provocations to your cart yet.
+        </p>
+
+        <a href="/collections/all" style="display: inline-block; padding: 1rem 2rem; background-color: #ffffff; color: #000000; text-decoration: none; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.025em; border: 2px solid #ffffff; transition: all 0.3s; border-radius: 0;">
+          Explore Provocations
+        </a>
+      </div>
+
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  .cart-item:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  @media (max-width: 768px) {
+    .cart-item {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .cart-item > div {
+      width: 100%;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Cart Main",
+  "settings": []
+}
+{% endschema %}
