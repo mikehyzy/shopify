@@ -33,11 +33,37 @@
       <!-- Desktop Navigation -->
       <nav class="hidden lg:flex items-center space-x-8" role="navigation" aria-label="Main navigation">
         {% for link in linklists[section.settings.menu].links %}
-          <a href="{{ link.url }}"
-             class="text-white font-heading text-sm uppercase tracking-wider hover:opacity-70 transition-opacity {% if link.active %}font-bold{% endif %}"
-             {% if link.active %}aria-current="page"{% endif %}>
-            {{ link.title }}
-          </a>
+          {% if link.links != blank %}
+            <!-- Dropdown Menu -->
+            <div class="relative group" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+              <button class="text-white font-heading text-sm uppercase tracking-wider hover:opacity-70 transition-opacity flex items-center"
+                      @click="open = !open">
+                {{ link.title }}
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </button>
+              <div x-show="open"
+                   x-transition
+                   class="absolute top-full left-0 mt-2 py-2 w-48 bg-black border border-white/20 shadow-lg"
+                   style="background-color: #000000;">
+                {% for child_link in link.links %}
+                  <a href="{{ child_link.url }}"
+                     class="block px-4 py-2 text-white font-heading text-sm uppercase tracking-wider hover:bg-white/10 transition-colors {% if child_link.active %}font-bold{% endif %}"
+                     {% if child_link.active %}aria-current="page"{% endif %}>
+                    {{ child_link.title }}
+                  </a>
+                {% endfor %}
+              </div>
+            </div>
+          {% else %}
+            <!-- Regular Link -->
+            <a href="{{ link.url }}"
+               class="text-white font-heading text-sm uppercase tracking-wider hover:opacity-70 transition-opacity {% if link.active %}font-bold{% endif %}"
+               {% if link.active %}aria-current="page"{% endif %}>
+              {{ link.title }}
+            </a>
+          {% endif %}
         {% endfor %}
 
         <!-- Cart Icon -->
@@ -93,12 +119,38 @@
       <ul class="space-y-6">
         {% for link in linklists[section.settings.menu].links %}
           <li>
-            <a href="{{ link.url }}"
-               class="block text-2xl font-heading text-white hover:opacity-70 transition-opacity {% if link.active %}font-bold{% endif %}"
-               {% if link.active %}aria-current="page"{% endif %}
-               @click="mobileMenuOpen = false">
-              {{ link.title }}
-            </a>
+            {% if link.links != blank %}
+              <!-- Mobile Dropdown -->
+              <div x-data="{ open: false }">
+                <button @click="open = !open"
+                        class="flex items-center justify-between w-full text-2xl font-heading text-white hover:opacity-70 transition-opacity {% if link.active %}font-bold{% endif %}">
+                  <span>{{ link.title }}</span>
+                  <svg class="w-6 h-6 transition-transform" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                  </svg>
+                </button>
+                <ul x-show="open" x-transition class="mt-4 ml-4 space-y-4">
+                  {% for child_link in link.links %}
+                    <li>
+                      <a href="{{ child_link.url }}"
+                         class="block text-xl font-heading text-white hover:opacity-70 transition-opacity {% if child_link.active %}font-bold{% endif %}"
+                         {% if child_link.active %}aria-current="page"{% endif %}
+                         @click="mobileMenuOpen = false">
+                        {{ child_link.title }}
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% else %}
+              <!-- Regular Link -->
+              <a href="{{ link.url }}"
+                 class="block text-2xl font-heading text-white hover:opacity-70 transition-opacity {% if link.active %}font-bold{% endif %}"
+                 {% if link.active %}aria-current="page"{% endif %}
+                 @click="mobileMenuOpen = false">
+                {{ link.title }}
+              </a>
+            {% endif %}
           </li>
         {% endfor %}
 
