@@ -12,7 +12,7 @@
     "hero": {
       "type": "hero-surrealist",
       "settings": {
-        "eyebrow_text": "A 501(c)(3) organization",
+        "eyebrow_text": "A 509(a)(2) organization",
         "heading": "Welcome to the Chicago Futures Salon",
         "subheading": "Exploring futures thinking through Surrealist, Situationist, and Futurist methods",
         "button_label": "Request Invitation",
@@ -186,7 +186,7 @@
         "heading": "The Corporation",
         "intro": "For a group rooted in surrealist and situationist traditions, 'lawful activities' is doing a lot of heavy lifting in our Articles of Incorporation. Our lawyers assure us détournement is not yet a felony.",
         "donation_heading": "Fund the Future",
-        "donation_text": "Chicago Futures Salon is a federally recognized 501(c)(3) nonprofit organization. Your donation is tax-deductible to the fullest extent permitted by law. Every contribution helps us build a more imaginative, anticipatory, and resilient community.",
+        "donation_text": "Chicago Futures Salon is a federally recognized 509(a)(2) nonprofit organization. Your donation is tax-deductible to the fullest extent permitted by law. Every contribution helps us build a more imaginative, anticipatory, and resilient community.",
         "donation_button_text": "Donate",
         "donation_url": "",
         "social_heading": "Help us get the word out.",
