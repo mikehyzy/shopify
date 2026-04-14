@@ -24,7 +24,10 @@
     <div class="max-w-2xl mx-auto">
       <div class="border border-white/20 p-8" style="background-color: #111;">
 
-        <form id="invitation-form" class="space-y-6" method="POST" action="{{ section.settings.form_action }}" target="_blank">
+        <form id="invitation-form" class="space-y-6" method="POST" action="https://formsubmit.co/{{ section.settings.notification_email }}" target="_blank">
+          <input type="hidden" name="_subject" value="New Invitation Request - Chicago Futures Salon">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -150,10 +153,11 @@
       "label": "Subheading"
     },
     {
-      "type": "url",
-      "id": "form_action",
-      "label": "Form Submission URL",
-      "info": "Enter your Google Form URL, FormSpree endpoint, or other form handler URL. Leave blank to collect via Shopify customer contact."
+      "type": "text",
+      "id": "notification_email",
+      "label": "Email Address",
+      "info": "Enter your email address to receive form submissions. First submission will require email confirmation.",
+      "default": "contact@chicagofuturessalon.com"
     }
   ],
   "presets": [
@@ -166,14 +170,19 @@
 
 <script>
   document.getElementById('invitation-form').addEventListener('submit', function(e) {
-    const formAction = '{{ section.settings.form_action }}';
+    const email = '{{ section.settings.notification_email }}';
 
-    if (!formAction || formAction === '') {
+    if (!email || email === '') {
       e.preventDefault();
-      alert('Form submission URL not configured. Please contact the site administrator.');
+      alert('Email address not configured. Please contact the site administrator.');
       return;
     }
 
+    // Change button text immediately
+    document.getElementById('submit-btn').textContent = 'Submitting...';
+    document.getElementById('submit-btn').disabled = true;
+
+    // Note: FormSubmit will handle the actual submission in new tab
     // Show success message after brief delay
     setTimeout(function() {
       document.getElementById('success-message').style.display = 'block';
@@ -182,6 +191,7 @@
 
       setTimeout(function() {
         document.getElementById('submit-btn').textContent = 'Submit Request';
+        document.getElementById('submit-btn').disabled = false;
         document.getElementById('success-message').style.display = 'none';
       }, 5000);
     }, 500);
