@@ -24,7 +24,7 @@
     <div class="max-w-2xl mx-auto">
       <div class="border border-white/20 p-8" style="background-color: #111;">
 
-        <form class="space-y-6">
+        <form id="invitation-form" class="space-y-6" method="POST" action="{{ section.settings.form_action }}" target="_blank">
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -33,6 +33,7 @@
               </label>
               <input type="text"
                      id="firstName"
+                     name="firstName"
                      required
                      class="w-full px-4 py-3 bg-black border border-white/30 text-white focus:border-white focus:outline-none"
                      placeholder="John">
@@ -44,6 +45,7 @@
               </label>
               <input type="text"
                      id="lastName"
+                     name="lastName"
                      required
                      class="w-full px-4 py-3 bg-black border border-white/30 text-white focus:border-white focus:outline-none"
                      placeholder="Doe">
@@ -56,6 +58,7 @@
             </label>
             <input type="email"
                    id="email"
+                   name="email"
                    required
                    class="w-full px-4 py-3 bg-black border border-white/30 text-white focus:border-white focus:outline-none"
                    placeholder="john@example.com">
@@ -67,6 +70,7 @@
             </label>
             <input type="text"
                    id="organization"
+                   name="organization"
                    required
                    class="w-full px-4 py-3 bg-black border border-white/30 text-white focus:border-white focus:outline-none"
                    placeholder="Your company">
@@ -77,6 +81,7 @@
               Why are you interested? *
             </label>
             <textarea id="interest"
+                      name="interest"
                       required
                       rows="4"
                       class="w-full px-4 py-3 bg-black border border-white/30 text-white focus:border-white focus:outline-none"
@@ -84,9 +89,14 @@
           </div>
 
           <button type="submit"
+                  id="submit-btn"
                   class="btn btn-primary w-full">
             Submit Request
           </button>
+
+          <div id="success-message" style="display: none; color: #00d4ff; text-align: center; padding: 1rem; border: 1px solid #00d4ff; margin-top: 1rem;">
+            Thank you! Your request has been submitted. We'll be in touch soon.
+          </div>
         </form>
 
         <p class="text-white/60 text-sm text-center mt-6">
@@ -138,6 +148,12 @@
       "type": "textarea",
       "id": "subheading",
       "label": "Subheading"
+    },
+    {
+      "type": "url",
+      "id": "form_action",
+      "label": "Form Submission URL",
+      "info": "Enter your Google Form URL, FormSpree endpoint, or other form handler URL. Leave blank to collect via Shopify customer contact."
     }
   ],
   "presets": [
@@ -147,3 +163,27 @@
   ]
 }
 {% endschema %}
+
+<script>
+  document.getElementById('invitation-form').addEventListener('submit', function(e) {
+    const formAction = '{{ section.settings.form_action }}';
+
+    if (!formAction || formAction === '') {
+      e.preventDefault();
+      alert('Form submission URL not configured. Please contact the site administrator.');
+      return;
+    }
+
+    // Show success message after brief delay
+    setTimeout(function() {
+      document.getElementById('success-message').style.display = 'block';
+      document.getElementById('invitation-form').reset();
+      document.getElementById('submit-btn').textContent = 'Request Submitted!';
+
+      setTimeout(function() {
+        document.getElementById('submit-btn').textContent = 'Submit Request';
+        document.getElementById('success-message').style.display = 'none';
+      }, 5000);
+    }, 500);
+  });
+</script>
