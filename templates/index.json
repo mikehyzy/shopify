@@ -81,18 +81,6 @@
     "events": {
       "type": "events-timeline",
       "blocks": {
-        "event_WMhAcT": {
-          "type": "event",
-          "settings": {
-            "title": "March Monthly Salon",
-            "event_date": "2026-03-12",
-            "event_time": "5:00 PM - 8:00 PM",
-            "location": "The telephone booth on 14th Street. Ask for Gerald. There is no Gerald.",
-            "description": "The ice is cracking and so is the consensus. We meet in a secret location to perform surgery on the calendar itself. March is the month that pretends to be an ending but is actually a wound reopening. Bring your instruments.",
-            "show_rsvp": true,
-            "rsvp_link": "https://forms.gle/Lvme7zTYak9dRDxV8"
-          }
-        },
         "event_QDYbxM": {
           "type": "event",
           "settings": {
@@ -105,28 +93,16 @@
             "rsvp_link": "https://forms.gle/Lvme7zTYak9dRDxV8"
           }
         },
-        "event_REtXzH": {
-          "type": "event",
-          "settings": {
-            "title": "May Monthly Salon",
-            "event_date": "2026-05-14",
-            "event_time": "6:00 PM - 8:00 PM",
-            "location": "Behind the third door of a building with only two doors.",
-            "description": "The air softens and the surveillance relaxes. We convene somewhere you won't expect to dismantle the future and reassemble it without the instruction manual. May is when the serious people stop paying attention. That is when we do our best work.",
-            "show_rsvp": true,
-            "rsvp_link": "https://forms.gle/Lvme7zTYak9dRDxV8"
-          }
-        },
         "event_jbfMLe": {
           "type": "event",
           "settings": {
             "title": "THE SPECTACLE",
-            "event_date": "2026-05-21",
+            "event_date": "2026-05-14",
             "event_time": "3:00 PM - 7:00 PM",
-            "location": "Industrious Loop Location",
-            "description": "Two hundred people in an industrial cathedral. Sponsors who bet on the strange. Guests who refuse to spectate. This is not a conference. This is not a networking event. This is a springtime detonation of everything we've been building in secret since the telephone booth on 14th Street.\n\nTHE SPECTACLE is Chicago Futures Salon at full volume. Experiential, immersive, ungovernable. Expect provocations, collaborations, performances, and at least one thing nobody planned. Spring doesn't ask permission and neither do we.\n\nHosted at Industrious. Doors open once. Bring someone who isn't ready.",
+            "location": "Secret Lair in Chicago",
+            "description": "Two hundred people in an industrial cathedral. Sponsors who bet on the strange. Guests who refuse to spectate. This is not a conference. This is not a networking event. This is a springtime detonation of everything we've been building in secret since the telephone booth on 14th Street.\n\nTHE SPECTACLE is Chicago Futures Salon at full volume. Experiential, immersive, ungovernable. Expect provocations, collaborations, performances, and at least one thing nobody planned. Spring doesn't ask permission and neither do we.\n\nHosted in the loop. Doors open once. Bring someone who isn't ready.",
             "show_rsvp": true,
-            "rsvp_link": ""
+            "rsvp_link": "https://luma.com/93lc25b0"
           }
         },
         "event-1": {
@@ -164,16 +140,40 @@
             "show_rsvp": true,
             "rsvp_link": "#invitation"
           }
+        },
+        "event_WMhAcT": {
+          "type": "event",
+          "settings": {
+            "title": "Sept Monthly Salon",
+            "event_date": "2026-09-12",
+            "event_time": "5:00 PM - 8:00 PM",
+            "location": "The telephone booth on 14th Street. Ask for Gerald. There is no Gerald.",
+            "description": "The ice is cracking and so is the consensus. We meet in a secret location to perform surgery on the calendar itself. March is the month that pretends to be an ending but is actually a wound reopening. Bring your instruments.",
+            "show_rsvp": true,
+            "rsvp_link": "https://forms.gle/Lvme7zTYak9dRDxV8"
+          }
+        },
+        "event_REtXzH": {
+          "type": "event",
+          "settings": {
+            "title": "October Monthly Salon",
+            "event_date": "2026-10-14",
+            "event_time": "6:00 PM - 8:00 PM",
+            "location": "Behind the third door of a building with only two doors.",
+            "description": "The air softens and the surveillance relaxes. We convene somewhere you won't expect to dismantle the future and reassemble it without the instruction manual. May is when the serious people stop paying attention. That is when we do our best work.",
+            "show_rsvp": true,
+            "rsvp_link": "https://forms.gle/Lvme7zTYak9dRDxV8"
+          }
         }
       },
       "block_order": [
-        "event_WMhAcT",
         "event_QDYbxM",
-        "event_REtXzH",
         "event_jbfMLe",
         "event-1",
         "event-2",
-        "event-3"
+        "event-3",
+        "event_WMhAcT",
+        "event_REtXzH"
       ],
       "settings": {
         "heading": "Upcoming Events",
