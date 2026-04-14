@@ -1,0 +1,247 @@
+{% comment %}
+  Article Page
+{% endcomment %}
+
+<div class="article-page section" style="background-color: #000000; min-height: 70vh; padding: 80px 0;">
+  <div class="container-custom" style="max-width: 900px; margin: 0 auto; padding: 0 2rem;">
+
+    <!-- Article Header -->
+    <header style="margin-bottom: 3rem;">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <div style="display: flex; justify-content: center; gap: 1rem; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255, 255, 255, 0.5); margin-bottom: 1.5rem;">
+          <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+            {{ article.published_at | date: '%B %d, %Y' }}
+          </time>
+          {% if article.author %}
+            <span>•</span>
+            <span>{{ article.author }}</span>
+          {% endif %}
+        </div>
+
+        <h1 style="font-size: clamp(2rem, 5vw, 3.5rem); font-family: 'Open Sans', sans-serif; font-weight: 700; color: #ffffff; margin-bottom: 1.5rem; line-height: 1.2;">
+          {{ article.title }}
+        </h1>
+
+        {% if article.excerpt != blank %}
+          <p style="color: rgba(255, 255, 255, 0.8); font-size: 1.25rem; line-height: 1.6;">
+            {{ article.excerpt }}
+          </p>
+        {% endif %}
+      </div>
+
+      {% if article.image %}
+        <div style="margin-bottom: 3rem;">
+          <img src="{{ article.image | image_url: width: 1200 }}"
+               alt="{{ article.title | escape }}"
+               style="width: 100%; height: auto; max-height: 500px; object-fit: cover;">
+        </div>
+      {% endif %}
+    </header>
+
+    <!-- Article Content -->
+    <div class="article-content" style="color: rgba(255, 255, 255, 0.85); font-size: 1.125rem; line-height: 1.8; margin-bottom: 4rem;">
+      {{ article.content }}
+    </div>
+
+    <!-- Tags -->
+    {% if article.tags.size > 0 %}
+      <div style="padding: 2rem 0; border-top: 1px solid rgba(255, 255, 255, 0.2); border-bottom: 1px solid rgba(255, 255, 255, 0.2); margin-bottom: 3rem;">
+        <h3 style="font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 0.875rem; color: rgba(255, 255, 255, 0.7); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">
+          Tags
+        </h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+          {% for tag in article.tags %}
+            <a href="{{ blog.url }}/tagged/{{ tag | handle }}" style="padding: 0.5rem 1rem; background-color: rgba(255, 255, 255, 0.1); color: #ffffff; text-decoration: none; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.3s;" onmouseover="this.style.backgroundColor='rgba(255, 255, 255, 0.2)'" onmouseout="this.style.backgroundColor='rgba(255, 255, 255, 0.1)'">
+              {{ tag }}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+    <!-- Share -->
+    <div style="padding: 2rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.2); margin-bottom: 3rem;">
+      <h3 style="font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 0.875rem; color: rgba(255, 255, 255, 0.7); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">
+        Share this article
+      </h3>
+      <div style="display: flex; gap: 1rem;">
+        <a href="https://twitter.com/intent/tweet?text={{ article.title | url_encode }}&url={{ shop.url }}{{ article.url }}"
+           target="_blank"
+           rel="noopener"
+           style="padding: 0.75rem 1.5rem; background-color: rgba(255, 255, 255, 0.1); color: #ffffff; text-decoration: none; font-size: 0.875rem; font-family: 'Open Sans', sans-serif; font-weight: 600; transition: all 0.3s;" onmouseover="this.style.backgroundColor='rgba(255, 255, 255, 0.2)'" onmouseout="this.style.backgroundColor='rgba(255, 255, 255, 0.1)'">
+          Twitter
+        </a>
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ shop.url }}{{ article.url }}"
+           target="_blank"
+           rel="noopener"
+           style="padding: 0.75rem 1.5rem; background-color: rgba(255, 255, 255, 0.1); color: #ffffff; text-decoration: none; font-size: 0.875rem; font-family: 'Open Sans', sans-serif; font-weight: 600; transition: all 0.3s;" onmouseover="this.style.backgroundColor='rgba(255, 255, 255, 0.2)'" onmouseout="this.style.backgroundColor='rgba(255, 255, 255, 0.1)'">
+          LinkedIn
+        </a>
+        <a href="mailto:?subject={{ article.title | url_encode }}&body={{ shop.url }}{{ article.url }}"
+           style="padding: 0.75rem 1.5rem; background-color: rgba(255, 255, 255, 0.1); color: #ffffff; text-decoration: none; font-size: 0.875rem; font-family: 'Open Sans', sans-serif; font-weight: 600; transition: all 0.3s;" onmouseover="this.style.backgroundColor='rgba(255, 255, 255, 0.2)'" onmouseout="this.style.backgroundColor='rgba(255, 255, 255, 0.1)'">
+          Email
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
+      {% if blog.previous_article %}
+        <a href="{{ blog.previous_article.url }}" style="padding: 1rem 1.5rem; background-color: transparent; color: #ffffff; text-decoration: none; border: 2px solid #ffffff; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.3s;" onmouseover="this.style.backgroundColor='#ffffff'; this.style.color='#000000'" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffff'">
+          ← Previous
+        </a>
+      {% else %}
+        <div></div>
+      {% endif %}
+
+      <a href="{{ blog.url }}" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.875rem; transition: color 0.2s;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='rgba(255, 255, 255, 0.7)'">
+        Back to {{ blog.title }}
+      </a>
+
+      {% if blog.next_article %}
+        <a href="{{ blog.next_article.url }}" style="padding: 1rem 1.5rem; background-color: transparent; color: #ffffff; text-decoration: none; border: 2px solid #ffffff; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.3s;" onmouseover="this.style.backgroundColor='#ffffff'; this.style.color='#000000'" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffff'">
+          Next →
+        </a>
+      {% else %}
+        <div></div>
+      {% endif %}
+    </div>
+
+    <!-- Comments -->
+    {% if blog.comments_enabled? %}
+      <div id="comments" style="padding: 3rem 0; border-top: 1px solid rgba(255, 255, 255, 0.2);">
+        <h3 style="font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 1.5rem; color: #ffffff; margin-bottom: 2rem;">
+          Comments ({{ article.comments_count }})
+        </h3>
+
+        {% paginate article.comments by 10 %}
+          {% if article.comments_count > 0 %}
+            <div style="margin-bottom: 3rem;">
+              {% for comment in article.comments %}
+                <div style="padding: 1.5rem; background-color: rgba(255, 255, 255, 0.05); margin-bottom: 1rem; border-left: 3px solid {{ comment.status == 'published' ? '#00d4ff' : 'rgba(255, 255, 255, 0.3)' }};">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem;">
+                    <strong style="color: #ffffff; font-size: 0.875rem;">{{ comment.author }}</strong>
+                    <time style="color: rgba(255, 255, 255, 0.5); font-size: 0.75rem;">{{ comment.created_at | date: '%B %d, %Y' }}</time>
+                  </div>
+                  <p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6;">
+                    {{ comment.content }}
+                  </p>
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          {% if paginate.pages > 1 %}
+            <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem;">
+              {% if paginate.previous %}
+                <a href="{{ paginate.previous.url }}" style="padding: 0.75rem 1.5rem; border: 1px solid rgba(255, 255, 255, 0.3); color: #ffffff; text-decoration: none;">Previous</a>
+              {% endif %}
+              {% if paginate.next %}
+                <a href="{{ paginate.next.url }}" style="padding: 0.75rem 1.5rem; border: 1px solid rgba(255, 255, 255, 0.3); color: #ffffff; text-decoration: none;">Next</a>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endpaginate %}
+
+        <!-- Comment Form -->
+        <div style="padding: 2rem; background-color: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2);">
+          <h4 style="font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 1.25rem; color: #ffffff; margin-bottom: 1.5rem;">
+            Leave a comment
+          </h4>
+
+          {% form 'new_comment', article %}
+            <div style="margin-bottom: 1.5rem;">
+              <label for="CommentAuthor" style="display: block; color: rgba(255, 255, 255, 0.7); font-size: 0.875rem; margin-bottom: 0.5rem;">Name *</label>
+              <input type="text"
+                     id="CommentAuthor"
+                     name="comment[author]"
+                     required
+                     style="width: 100%; padding: 0.75rem 1rem; background-color: #0a0a0a; border: 1px solid rgba(255, 255, 255, 0.3); color: #ffffff;">
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+              <label for="CommentEmail" style="display: block; color: rgba(255, 255, 255, 0.7); font-size: 0.875rem; margin-bottom: 0.5rem;">Email *</label>
+              <input type="email"
+                     id="CommentEmail"
+                     name="comment[email]"
+                     required
+                     style="width: 100%; padding: 0.75rem 1rem; background-color: #0a0a0a; border: 1px solid rgba(255, 255, 255, 0.3); color: #ffffff;">
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+              <label for="CommentBody" style="display: block; color: rgba(255, 255, 255, 0.7); font-size: 0.875rem; margin-bottom: 0.5rem;">Comment *</label>
+              <textarea id="CommentBody"
+                        name="comment[body]"
+                        required
+                        rows="5"
+                        style="width: 100%; padding: 0.75rem 1rem; background-color: #0a0a0a; border: 1px solid rgba(255, 255, 255, 0.3); color: #ffffff;"></textarea>
+            </div>
+
+            <button type="submit" style="padding: 1rem 2rem; background-color: #ffffff; color: #000000; border: 2px solid #ffffff; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.backgroundColor='#000000'; this.style.color='#ffffff'" onmouseout="this.style.backgroundColor='#ffffff'; this.style.color='#000000'">
+              Post Comment
+            </button>
+          {% endform %}
+        </div>
+      </div>
+    {% endif %}
+
+  </div>
+</div>
+
+<style>
+  .article-content h2,
+  .article-content h3,
+  .article-content h4 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    color: #ffffff;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .article-content h2 {
+    font-size: 2rem;
+  }
+
+  .article-content h3 {
+    font-size: 1.5rem;
+  }
+
+  .article-content p {
+    margin-bottom: 1.5rem;
+  }
+
+  .article-content a {
+    color: #00d4ff;
+    text-decoration: underline;
+    transition: opacity 0.2s;
+  }
+
+  .article-content a:hover {
+    opacity: 0.7;
+  }
+
+  .article-content ul,
+  .article-content ol {
+    margin-bottom: 1.5rem;
+    padding-left: 2rem;
+  }
+
+  .article-content li {
+    margin-bottom: 0.5rem;
+  }
+
+  .article-content blockquote {
+    border-left: 4px solid #00d4ff;
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .article-content img {
+    max-width: 100%;
+    height: auto;
+    margin: 2rem 0;
+  }
+</style>

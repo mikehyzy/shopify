@@ -99,10 +99,15 @@
           Subscribe to receive invitations and insights into futures thinking.
         </p>
 
-        <form action="{{ section.settings.newsletter_action }}"
+        <form action="https://formsubmit.co/{{ section.settings.newsletter_email | default: 'mike.hyzy@gmail.com' }}"
               method="post"
               class="newsletter-form"
+              target="_blank"
               x-data="{ email: '', submitted: false }">
+          <input type="hidden" name="_subject" value="Newsletter Subscription - Chicago Futures Salon">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_cc" value="michael.s.marshall8@gmail.com,annamulcahy5@gmail.com">
           <div class="flex flex-col space-y-3">
             <input type="email"
                    name="email"
@@ -222,9 +227,11 @@
       "content": "Newsletter"
     },
     {
-      "type": "url",
-      "id": "newsletter_action",
-      "label": "Newsletter form action URL"
+      "type": "text",
+      "id": "newsletter_email",
+      "label": "Newsletter Email",
+      "info": "Email address to receive newsletter subscriptions",
+      "default": "mike.hyzy@gmail.com"
     },
     {
       "type": "header",

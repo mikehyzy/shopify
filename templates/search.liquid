@@ -1,0 +1,119 @@
+{% comment %}
+  Search Results Page
+{% endcomment %}
+
+<div class="search-page section" style="background-color: #000000; min-height: 70vh; padding: 80px 0;">
+  <div class="container-custom" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+
+    <!-- Page Header -->
+    <div class="text-center mb-12">
+      <h1 style="font-size: clamp(2rem, 5vw, 4rem); font-family: 'Open Sans', sans-serif; font-weight: 700; color: #ffffff; margin-bottom: 2rem;">
+        {% if search.performed %}
+          Search Results
+        {% else %}
+          Search
+        {% endif %}
+      </h1>
+
+      <!-- Search Form -->
+      <form action="/search" method="get" role="search" style="max-width: 600px; margin: 0 auto 3rem auto;">
+        <div style="display: flex; gap: 1rem;">
+          <input type="search"
+                 name="q"
+                 value="{{ search.terms | escape }}"
+                 placeholder="Search provocations, events..."
+                 style="flex: 1; padding: 1rem 1.5rem; background-color: #0a0a0a; border: 1px solid rgba(255, 255, 255, 0.3); color: #ffffff; font-family: 'Open Sans', sans-serif; font-size: 1rem;"
+                 autofocus>
+          <button type="submit" style="padding: 1rem 2rem; background-color: #ffffff; color: #000000; border: 2px solid #ffffff; font-family: 'Open Sans', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; transition: all 0.3s;">
+            Search
+          </button>
+        </div>
+      </form>
+    </div>
+
+    {% if search.performed %}
+      {% if search.results_count > 0 %}
+        <!-- Results Count -->
+        <p style="color: rgba(255, 255, 255, 0.7); text-align: center; margin-bottom: 3rem; font-size: 1.125rem;">
+          Found {{ search.results_count }} result{% if search.results_count != 1 %}s{% endif %} for "{{ search.terms }}"
+        </p>
+
+        <!-- Results Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem;">
+          {% for item in search.results %}
+            <div style="border: 1px solid rgba(255, 255, 255, 0.2); background-color: #0a0a0a; padding: 2rem; transition: all 0.3s;" onmouseover="this.style.borderColor='rgba(255, 255, 255, 0.4)'" onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.2)'">
+
+              {% if item.featured_image %}
+                <a href="{{ item.url }}">
+                  <img src="{{ item.featured_image | image_url: width: 400 }}"
+                       alt="{{ item.title | escape }}"
+                       style="width: 100%; height: 200px; object-fit: cover; margin-bottom: 1.5rem;">
+                </a>
+              {% endif %}
+
+              <h3 style="font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 1.25rem; color: #ffffff; margin-bottom: 0.75rem;">
+                <a href="{{ item.url }}" style="color: #ffffff; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='#ffffff'">
+                  {{ item.title }}
+                </a>
+              </h3>
+
+              {% if item.price %}
+                <p style="color: #00d4ff; font-weight: 600; font-size: 1.125rem; margin-bottom: 1rem;">
+                  {{ item.price | money }}
+                </p>
+              {% endif %}
+
+              {% if item.excerpt_or_content %}
+                <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.875rem; line-height: 1.6; margin-bottom: 1.5rem;">
+                  {{ item.excerpt_or_content | strip_html | truncate: 150 }}
+                </p>
+              {% endif %}
+
+              <a href="{{ item.url }}" style="display: inline-block; padding: 0.75rem 1.5rem; background-color: transparent; color: #ffffff; text-decoration: none; border: 2px solid #ffffff; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.3s;" onmouseover="this.style.backgroundColor='#ffffff'; this.style.color='#000000'" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffff'">
+                View Details
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        {% if paginate.pages > 1 %}
+          <div style="margin-top: 4rem; display: flex; justify-content: center; gap: 1rem;">
+            {% if paginate.previous %}
+              <a href="{{ paginate.previous.url }}" style="padding: 0.75rem 1.5rem; border: 1px solid rgba(255, 255, 255, 0.3); color: #ffffff; text-decoration: none; font-family: 'Open Sans', sans-serif;">
+                Previous
+              </a>
+            {% endif %}
+
+            {% if paginate.next %}
+              <a href="{{ paginate.next.url }}" style="padding: 0.75rem 1.5rem; border: 1px solid rgba(255, 255, 255, 0.3); color: #ffffff; text-decoration: none; font-family: 'Open Sans', sans-serif;">
+                Next
+              </a>
+            {% endif %}
+          </div>
+        {% endif %}
+
+      {% else %}
+        <!-- No Results -->
+        <div style="text-align: center; padding: 4rem 2rem;">
+          <svg style="width: 6rem; height: 6rem; margin: 0 auto 2rem auto; color: rgba(255, 255, 255, 0.3);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+
+          <h2 style="font-size: 1.5rem; font-family: 'Open Sans', sans-serif; font-weight: 700; color: #ffffff; margin-bottom: 1rem;">
+            No results found for "{{ search.terms }}"
+          </h2>
+
+          <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 2rem;">
+            Try searching with different keywords or browse our collection.
+          </p>
+
+          <a href="/collections/all" style="display: inline-block; padding: 1rem 2rem; background-color: #ffffff; color: #000000; text-decoration: none; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; border: 2px solid #ffffff; transition: all 0.3s;">
+            Browse All Provocations
+          </a>
+        </div>
+      {% endif %}
+    {% endif %}
+
+  </div>
+</div>

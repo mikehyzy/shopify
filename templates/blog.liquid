@@ -1,0 +1,124 @@
+{% comment %}
+  Blog Archive Page
+{% endcomment %}
+
+{% paginate blog.articles by 12 %}
+
+<div class="blog-page section" style="background-color: #000000; min-height: 70vh; padding: 80px 0;">
+  <div class="container-custom" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+
+    <!-- Page Header -->
+    <div class="text-center mb-16">
+      <h1 style="font-size: clamp(2rem, 5vw, 4rem); font-family: 'Open Sans', sans-serif; font-weight: 700; color: #ffffff; margin-bottom: 1rem;">
+        {{ blog.title }}
+      </h1>
+      {% if blog.description != blank %}
+        <p style="color: rgba(255, 255, 255, 0.7); font-size: 1.125rem; max-width: 700px; margin: 0 auto;">
+          {{ blog.description }}
+        </p>
+      {% endif %}
+    </div>
+
+    {% if blog.articles_count > 0 %}
+      <!-- Articles Grid -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 3rem; margin-bottom: 4rem;">
+        {% for article in blog.articles %}
+          <article style="border: 1px solid rgba(255, 255, 255, 0.2); background-color: #0a0a0a; transition: all 0.3s;" onmouseover="this.style.borderColor='rgba(255, 255, 255, 0.4)'; this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.2)'; this.style.transform='translateY(0)'">
+
+            {% if article.image %}
+              <a href="{{ article.url }}">
+                <img src="{{ article.image | image_url: width: 600 }}"
+                     alt="{{ article.title | escape }}"
+                     style="width: 100%; height: 250px; object-fit: cover;">
+              </a>
+            {% endif %}
+
+            <div style="padding: 2rem;">
+              <!-- Date and Author -->
+              <div style="display: flex; gap: 1rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255, 255, 255, 0.5); margin-bottom: 1rem;">
+                <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+                  {{ article.published_at | date: '%B %d, %Y' }}
+                </time>
+                {% if article.author %}
+                  <span>•</span>
+                  <span>{{ article.author }}</span>
+                {% endif %}
+              </div>
+
+              <!-- Title -->
+              <h2 style="font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 1.5rem; color: #ffffff; margin-bottom: 1rem;">
+                <a href="{{ article.url }}" style="color: #ffffff; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='#ffffff'">
+                  {{ article.title }}
+                </a>
+              </h2>
+
+              <!-- Excerpt -->
+              {% if article.excerpt != blank %}
+                <p style="color: rgba(255, 255, 255, 0.7); line-height: 1.6; margin-bottom: 1.5rem;">
+                  {{ article.excerpt | strip_html | truncate: 150 }}
+                </p>
+              {% else %}
+                <p style="color: rgba(255, 255, 255, 0.7); line-height: 1.6; margin-bottom: 1.5rem;">
+                  {{ article.content | strip_html | truncate: 150 }}
+                </p>
+              {% endif %}
+
+              <!-- Read More -->
+              <a href="{{ article.url }}" style="display: inline-block; padding: 0.75rem 1.5rem; background-color: transparent; color: #ffffff; text-decoration: none; border: 2px solid #ffffff; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.3s;" onmouseover="this.style.backgroundColor='#ffffff'; this.style.color='#000000'" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffff'">
+                Read More
+              </a>
+
+              <!-- Tags -->
+              {% if article.tags.size > 0 %}
+                <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+                  <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                    {% for tag in article.tags %}
+                      <span style="padding: 0.25rem 0.75rem; background-color: rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.7); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                        {{ tag }}
+                      </span>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+
+      <!-- Pagination -->
+      {% if paginate.pages > 1 %}
+        <div style="display: flex; justify-content: center; align-items: center; gap: 1rem;">
+          {% if paginate.previous %}
+            <a href="{{ paginate.previous.url }}" style="padding: 0.75rem 1.5rem; border: 1px solid rgba(255, 255, 255, 0.3); color: #ffffff; text-decoration: none; font-family: 'Open Sans', sans-serif; font-weight: 600; transition: all 0.3s;" onmouseover="this.style.backgroundColor='rgba(255, 255, 255, 0.1)'" onmouseout="this.style.backgroundColor='transparent'">
+              ← Previous
+            </a>
+          {% endif %}
+
+          <span style="color: rgba(255, 255, 255, 0.7); font-size: 0.875rem;">
+            Page {{ paginate.current_page }} of {{ paginate.pages }}
+          </span>
+
+          {% if paginate.next %}
+            <a href="{{ paginate.next.url }}" style="padding: 0.75rem 1.5rem; border: 1px solid rgba(255, 255, 255, 0.3); color: #ffffff; text-decoration: none; font-family: 'Open Sans', sans-serif; font-weight: 600; transition: all 0.3s;" onmouseover="this.style.backgroundColor='rgba(255, 255, 255, 0.1)'" onmouseout="this.style.backgroundColor='transparent'">
+              Next →
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+
+    {% else %}
+      <!-- No Articles -->
+      <div style="text-align: center; padding: 4rem 2rem;">
+        <h2 style="font-size: 1.5rem; font-family: 'Open Sans', sans-serif; font-weight: 700; color: #ffffff; margin-bottom: 1rem;">
+          No articles yet
+        </h2>
+        <p style="color: rgba(255, 255, 255, 0.7);">
+          Check back soon for futures thinking insights and provocations.
+        </p>
+      </div>
+    {% endif %}
+
+  </div>
+</div>
+
+{% endpaginate %}
