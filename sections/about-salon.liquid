@@ -1,0 +1,76 @@
+{% comment %}
+  About the Salon Section - Long-form description
+{% endcomment %}
+
+<section class="about-salon-section section relative"
+         style="background-color: #000000; padding: 80px 0;"
+         id="about-salon">
+
+  <div class="container-custom" style="max-width: 1000px; margin: 0 auto; padding: 0 2rem;">
+
+    <!-- Section Header -->
+    {% if section.settings.heading != blank %}
+      <div class="text-center mb-12">
+        <h2 class="text-white font-bold" style="font-size: clamp(2rem, 5vw, 4rem); font-family: 'Open Sans', sans-serif; margin-bottom: 2rem;">
+          {{ section.settings.heading }}
+        </h2>
+      </div>
+    {% endif %}
+
+    <!-- Paragraphs -->
+    <div class="about-salon-content" style="color: #ffffff; font-size: 1.125rem; line-height: 1.9; max-width: 850px; margin: 0 auto;">
+      {% if section.settings.paragraph_1 != blank %}
+        <p style="margin-bottom: 2rem; opacity: 0.9;">
+          {{ section.settings.paragraph_1 }}
+        </p>
+      {% endif %}
+
+      {% if section.settings.paragraph_2 != blank %}
+        <p style="opacity: 0.9;">
+          {{ section.settings.paragraph_2 }}
+        </p>
+      {% endif %}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  @media (max-width: 640px) {
+    .about-salon-content {
+      font-size: 1rem !important;
+      line-height: 1.8 !important;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "About the Salon",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "About the Salon"
+    },
+    {
+      "type": "richtext",
+      "id": "paragraph_1",
+      "label": "First Paragraph",
+      "default": "<p>Chicago Futures Salon was inspired by the salons of late-19th-century Paris, recurring private gatherings where a host brought writers, artists, politicians, and thinkers into a drawing room on a fixed day of the week. The salons were where reputations were made, careers launched, alliances formed, and arguments shaped that went on to reshape public life well beyond the room. The Chicago Salon also channels creativity from the Surrealists, iconoclasm from the Situationists, and extrapolation from the Futurists, and juxtaposes it all in lively conversation and debate using provocations developed inside the salon itself.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "paragraph_2",
+      "label": "Second Paragraph",
+      "default": "<p>The output is the same as the original salons produced. Connections are made, new ideas flourish, methods are shared and sometimes generated, and put to use where needed. We keep the original form: a blend of intimacy and influence, big ideas in a small room, a melting pot of executives, academics, artists, and civic leaders.</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About the Salon"
+    }
+  ]
+}
+{% endschema %}

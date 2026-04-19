@@ -24,6 +24,14 @@
         "quote_author": "André Breton"
       }
     },
+    "about-salon": {
+      "type": "about-salon",
+      "settings": {
+        "heading": "About the Salon",
+        "paragraph_1": "<p>Chicago Futures Salon was inspired by the salons of late-19th-century Paris, recurring private gatherings where a host brought writers, artists, politicians, and thinkers into a drawing room on a fixed day of the week. The salons were where reputations were made, careers launched, alliances formed, and arguments shaped that went on to reshape public life well beyond the room. The Chicago Salon also channels creativity from the Surrealists, iconoclasm from the Situationists, and extrapolation from the Futurists, and juxtaposes it all in lively conversation and debate using provocations developed inside the salon itself.</p>",
+        "paragraph_2": "<p>The output is the same as the original salons produced. Connections are made, new ideas flourish, methods are shared and sometimes generated, and put to use where needed. We keep the original form: a blend of intimacy and influence, big ideas in a small room, a melting pot of executives, academics, artists, and civic leaders.</p>"
+      }
+    },
     "manifesto": {
       "type": "manifesto-accordion",
       "blocks": {
@@ -204,6 +212,7 @@
   },
   "order": [
     "hero",
+    "about-salon",
     "manifesto",
     "games",
     "events",
