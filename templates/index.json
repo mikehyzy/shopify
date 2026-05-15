@@ -81,18 +81,6 @@
     "events": {
       "type": "events-timeline",
       "blocks": {
-        "event_QDYbxM": {
-          "type": "event",
-          "settings": {
-            "title": "April Monthly Salon",
-            "event_date": "20206-04-09",
-            "event_time": "5:00 PM - 8:00 PM",
-            "location": "A basement that doesn't appear on any blueprint. Turn left where the street stops making sense. You'll know it by the smell of burnt futures.",
-            "description": "The city is lying to you about spring. We gather at an undisclosed address to interrogate the false promises of renewal and build better ones from stolen parts. April is a forger's month and we are its apprentices. Nothing blooms without a conspiracy.",
-            "show_rsvp": true,
-            "rsvp_link": "https://forms.gle/Lvme7zTYak9dRDxV8"
-          }
-        },
         "event_jbfMLe": {
           "type": "event",
           "settings": {
@@ -167,7 +155,6 @@
         }
       },
       "block_order": [
-        "event_QDYbxM",
         "event_jbfMLe",
         "event-1",
         "event-2",
