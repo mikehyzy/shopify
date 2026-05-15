@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "spectacle-recap": {
+      "type": "spectacle-recap",
+      "settings": {
+        "welcome_video_url": "",
+        "keynote_video_url": "",
+        "workshop_video_url": "",
+        "chicago2040_video_url": "",
+        "jazz_video_url": "",
+        "improv_video_url": ""
+      }
+    }
+  },
+  "order": [
+    "spectacle-recap"
+  ]
+}

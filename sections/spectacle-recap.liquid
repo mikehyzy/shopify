@@ -1,0 +1,259 @@
+{% comment %}
+  The Spectacle Event Recap Section
+{% endcomment %}
+
+<section class="spectacle-recap section" style="background-color: #000000; padding: 80px 0;">
+  <div class="container-custom" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+
+    <!-- Page Header -->
+    <div class="text-center mb-16">
+      <h1 style="font-size: clamp(3rem, 8vw, 5rem); font-family: 'Open Sans', sans-serif; font-weight: 700; color: #ffffff; margin-bottom: 1rem; letter-spacing: 0.02em;">
+        THE SPECTACLE
+      </h1>
+      <p style="font-size: 1.25rem; color: rgba(255, 255, 255, 0.7); margin-bottom: 3rem;">
+        May 14, 2026
+      </p>
+
+      <!-- Opening Description -->
+      <div style="max-width: 900px; margin: 0 auto; color: #ffffff; font-size: 1.125rem; line-height: 1.8;">
+        <p style="margin-bottom: 1.5rem; font-weight: 600;">
+          THE SPECTACLE was what happens when futures thinking refuses to stay theoretical.
+        </p>
+        <p style="margin-bottom: 1.5rem;">
+          May 14, 2026. A modern space right off the Chicago River. Six sessions ranging from practical foresight frameworks to live jazz improvisation to hands-on creative disruption. The kind of event where keynotes turn into workshops, where a jazz band becomes a working model for collaboration, and where the insights generated in the room prove more valuable than anything you could have planned for.
+        </p>
+        <p style="margin-bottom: 1.5rem; font-weight: 600;">
+          We earned a 4.8 out of 5 on Luma. The performers delivered. The crowd showed up ready to build, not just observe. And the conversations that started here are still happening.
+        </p>
+        <p style="margin-bottom: 1.5rem;">
+          Below, watch the sessions that made it work.
+        </p>
+        <p style="margin-bottom: 0; font-style: italic; opacity: 0.8;">
+          Thank you to our sponsors: CGI, Mural, and ElevenLabs. And to our network partners—1871 and Parlor Social—for making ambitious experiments like this possible.
+        </p>
+      </div>
+    </div>
+
+    <!-- Session 1: Welcome -->
+    <div class="session-block" style="border: 1px solid rgba(255, 255, 255, 0.2); background-color: #0a0a0a; padding: 3rem 2rem; margin-bottom: 2rem;">
+      <h2 style="font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 1.75rem; color: #ffffff; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">
+        WELCOME
+      </h2>
+      <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.125rem; margin-bottom: 0.5rem; font-weight: 600;">
+        Anna Mulcahy, Board of Directors
+      </p>
+      <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 2rem; line-height: 1.6;">
+        The story of how the Salon came together and what it exists to do.
+      </p>
+      {% if section.settings.welcome_video_url != blank %}
+        <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000;">
+          <iframe src="{{ section.settings.welcome_video_url }}"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+        </div>
+      {% else %}
+        <div style="background-color: #000000; border: 2px dashed rgba(255, 255, 255, 0.3); padding: 4rem 2rem; text-align: center;">
+          <p style="color: rgba(255, 255, 255, 0.5); font-style: italic;">YouTube video embed will appear here</p>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Session 2: Keynote -->
+    <div class="session-block" style="border: 1px solid rgba(255, 255, 255, 0.2); background-color: #0a0a0a; padding: 3rem 2rem; margin-bottom: 2rem;">
+      <h2 style="font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 1.75rem; color: #ffffff; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">
+        KEYNOTE — CHARLES PLATH
+      </h2>
+      <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.125rem; margin-bottom: 0.5rem; font-weight: 600;">
+        From Anticipation to Preparation: Designing for a More Resilient Today
+      </p>
+      <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 2rem; line-height: 1.6;">
+        A practical, step-by-step approach to foresight. Framing a research question, scanning signals, mapping critical uncertainties, and building scenarios that help you make more resilient decisions today.
+      </p>
+      {% if section.settings.keynote_video_url != blank %}
+        <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000;">
+          <iframe src="{{ section.settings.keynote_video_url }}"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+        </div>
+      {% else %}
+        <div style="background-color: #000000; border: 2px dashed rgba(255, 255, 255, 0.3); padding: 4rem 2rem; text-align: center;">
+          <p style="color: rgba(255, 255, 255, 0.5); font-style: italic;">YouTube video embed will appear here</p>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Session 3: Workshop -->
+    <div class="session-block" style="border: 1px solid rgba(255, 255, 255, 0.2); background-color: #0a0a0a; padding: 3rem 2rem; margin-bottom: 2rem;">
+      <h2 style="font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 1.75rem; color: #ffffff; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">
+        WORKSHOP — MIKE HYZY AND MICHAEL MARSHALL
+      </h2>
+      <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.125rem; margin-bottom: 0.5rem; font-weight: 600;">
+        Artistic Disruption for Business Innovation
+      </p>
+      <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 2rem; line-height: 1.6;">
+        A hands-on session applying Surrealist and Situationist creative techniques to futures thinking and business strategy. Participants work through a series of provocations designed to break habitual thinking patterns and generate creative business ideas that shift the paradigm.
+      </p>
+      {% if section.settings.workshop_video_url != blank %}
+        <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000;">
+          <iframe src="{{ section.settings.workshop_video_url }}"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+        </div>
+      {% else %}
+        <div style="background-color: #000000; border: 2px dashed rgba(255, 255, 255, 0.3); padding: 4rem 2rem; text-align: center;">
+          <p style="color: rgba(255, 255, 255, 0.5); font-style: italic;">YouTube video embed will appear here</p>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Session 4: Chicago 2040 -->
+    <div class="session-block" style="border: 1px solid rgba(255, 255, 255, 0.2); background-color: #0a0a0a; padding: 3rem 2rem; margin-bottom: 2rem;">
+      <h2 style="font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 1.75rem; color: #ffffff; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">
+        CHICAGO 2040 READOUT
+      </h2>
+      <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.125rem; margin-bottom: 0.5rem; font-weight: 600;">
+        Marta Cuciurean-Zapan and Max Lackner from IDEO
+      </p>
+      <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 2rem; line-height: 1.6;">
+        Findings from our December scenarios exercise and what comes next for the work.
+      </p>
+      {% if section.settings.chicago2040_video_url != blank %}
+        <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000;">
+          <iframe src="{{ section.settings.chicago2040_video_url }}"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+        </div>
+      {% else %}
+        <div style="background-color: #000000; border: 2px dashed rgba(255, 255, 255, 0.3); padding: 4rem 2rem; text-align: center;">
+          <p style="color: rgba(255, 255, 255, 0.5); font-style: italic;">YouTube video embed will appear here</p>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Session 5: Jazz -->
+    <div class="session-block" style="border: 1px solid rgba(255, 255, 255, 0.2); background-color: #0a0a0a; padding: 3rem 2rem; margin-bottom: 2rem;">
+      <h2 style="font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 1.75rem; color: #ffffff; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">
+        JAZZ AS A MODEL FOR HIGH-PERFORMING TEAMS
+      </h2>
+      <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.125rem; margin-bottom: 0.5rem; font-weight: 600;">
+        Jim Kalbach
+      </p>
+      <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 2rem; line-height: 1.6;">
+        Jim Kalbach, Chief Evangelist at Mural and author of The Jobs to Be Done Playbook, brings a live jazz band on stage to explore what improvisation teaches us about teamwork: listening, adapting, making space, building on others' ideas, and staying aligned in motion. Thirty minutes. Live music. A working model for better collaboration.
+      </p>
+      {% if section.settings.jazz_video_url != blank %}
+        <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000;">
+          <iframe src="{{ section.settings.jazz_video_url }}"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+        </div>
+      {% else %}
+        <div style="background-color: #000000; border: 2px dashed rgba(255, 255, 255, 0.3); padding: 4rem 2rem; text-align: center;">
+          <p style="color: rgba(255, 255, 255, 0.5); font-style: italic;">YouTube video embed will appear here</p>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Session 6: Foresight Improv -->
+    <div class="session-block" style="border: 1px solid rgba(255, 255, 255, 0.2); background-color: #0a0a0a; padding: 3rem 2rem; margin-bottom: 2rem;">
+      <h2 style="font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 1.75rem; color: #ffffff; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">
+        FORESIGHT IMPROV
+      </h2>
+      <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.125rem; margin-bottom: 0.5rem; font-weight: 600;">
+        Matt Carmichael with Alexandra Levit and Michael Marshall
+      </p>
+      <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 2rem; line-height: 1.6;">
+        An interactive foresight session where professional futurists speculate on emerging futures through improv techniques and real-time audience input. Collaborative, fast-paced, and unpredictable.
+      </p>
+      {% if section.settings.improv_video_url != blank %}
+        <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000;">
+          <iframe src="{{ section.settings.improv_video_url }}"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+        </div>
+      {% else %}
+        <div style="background-color: #000000; border: 2px dashed rgba(255, 255, 255, 0.3); padding: 4rem 2rem; text-align: center;">
+          <p style="color: rgba(255, 255, 255, 0.5); font-style: italic;">YouTube video embed will appear here</p>
+        </div>
+      {% endif %}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  @media (max-width: 768px) {
+    .session-block {
+      padding: 2rem 1.5rem !important;
+    }
+    .session-block h2 {
+      font-size: 1.25rem !important;
+    }
+    .session-block p {
+      font-size: 1rem !important;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "The Spectacle Recap",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Video URLs"
+    },
+    {
+      "type": "paragraph",
+      "content": "Enter YouTube embed URLs (e.g., https://www.youtube.com/embed/VIDEO_ID)"
+    },
+    {
+      "type": "url",
+      "id": "welcome_video_url",
+      "label": "Welcome - Anna Mulcahy Video URL"
+    },
+    {
+      "type": "url",
+      "id": "keynote_video_url",
+      "label": "Keynote - Charles Plath Video URL"
+    },
+    {
+      "type": "url",
+      "id": "workshop_video_url",
+      "label": "Workshop - Hyzy/Marshall Video URL"
+    },
+    {
+      "type": "url",
+      "id": "chicago2040_video_url",
+      "label": "Chicago 2040 Readout Video URL"
+    },
+    {
+      "type": "url",
+      "id": "jazz_video_url",
+      "label": "Jazz Session - Jim Kalbach Video URL"
+    },
+    {
+      "type": "url",
+      "id": "improv_video_url",
+      "label": "Foresight Improv Video URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "The Spectacle Recap"
+    }
+  ]
+}
+{% endschema %}
