@@ -197,8 +197,7 @@
       "type": "invitation-form",
       "settings": {
         "heading": "Request an Invitation",
-        "subheading": "The Chicago Futures Salon is an invitation-only community. Share your interest and we'll be in touch.",
-        "notification_email": "mike.hyzy@gmail.com"
+        "subheading": "The Chicago Futures Salon is an invitation-only community. Share your interest and we'll be in touch."
       }
     }
   },

@@ -99,33 +99,35 @@
           Subscribe to receive invitations and insights into futures thinking.
         </p>
 
-        <form action="https://formsubmit.co/{{ section.settings.newsletter_email | default: 'mike.hyzy@gmail.com' }}"
-              method="post"
-              class="newsletter-form"
-              target="_blank"
-              x-data="{ email: '', submitted: false }">
-          <input type="hidden" name="_subject" value="Newsletter Subscription - Chicago Futures Salon">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_cc" value="michael.s.marshall8@gmail.com,annamulcahy5@gmail.com">
+        {% form 'contact', class: 'newsletter-form' %}
+          {% if form.posted_successfully? %}
+            <p class="text-white text-xs mb-3">
+              Thank you for subscribing!
+            </p>
+          {% endif %}
+
+          {% if form.errors %}
+            <p class="text-red-400 text-xs mb-3">
+              {{ form.errors | default_errors }}
+            </p>
+          {% endif %}
+
+          <input type="hidden" name="contact[subject]" value="Newsletter Subscription - Chicago Futures Salon">
+          <input type="hidden" name="contact[tags]" value="newsletter">
+
           <div class="flex flex-col space-y-3">
             <input type="email"
-                   name="email"
-                   x-model="email"
+                   name="contact[email]"
                    placeholder="Your email"
                    required
                    class="form-input text-sm"
                    aria-label="Email for newsletter">
             <button type="submit"
-                    class="btn btn-primary text-sm py-2"
-                    @click="submitted = true">
+                    class="btn btn-primary text-sm py-2">
               Subscribe
             </button>
           </div>
-          <p x-show="submitted" class="text-white text-xs mt-2">
-            Thank you for subscribing!
-          </p>
-        </form>
+        {% endform %}
       </div>
     </div>
 
@@ -227,11 +229,8 @@
       "content": "Newsletter"
     },
     {
-      "type": "text",
-      "id": "newsletter_email",
-      "label": "Newsletter Email",
-      "info": "Email address to receive newsletter subscriptions",
-      "default": "mike.hyzy@gmail.com"
+      "type": "paragraph",
+      "content": "Newsletter subscriptions will be sent to your store contact email (Settings > General > Store contact email)."
     },
     {
       "type": "header",

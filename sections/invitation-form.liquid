@@ -24,84 +24,90 @@
     <div class="max-w-2xl mx-auto">
       <div class="border border-white/20 p-8" style="background-color: #111;">
 
-        <form id="invitation-form" class="space-y-6" method="POST" action="https://formsubmit.co/{{ section.settings.notification_email }}" target="_blank">
-          <input type="hidden" name="_subject" value="New Invitation Request - Chicago Futures Salon">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_cc" value="michael.s.marshall8@gmail.com,annamulcahy5@gmail.com">
+        {% form 'contact' %}
+          {% if form.posted_successfully? %}
+            <div style="color: #00d4ff; text-align: center; padding: 1rem; border: 1px solid #00d4ff; margin-bottom: 1.5rem;">
+              Thank you! Your request has been submitted. We'll be in touch soon.
+            </div>
+          {% endif %}
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label class="block text-white text-sm font-bold mb-2" for="firstName">
-                First Name *
-              </label>
-              <input type="text"
-                     id="firstName"
-                     name="firstName"
-                     required
-                     class="w-full px-4 py-3 bg-black border border-white/30 text-white focus:border-white focus:outline-none"
-                     placeholder="John">
+          {% if form.errors %}
+            <div style="color: #ff6b6b; text-align: center; padding: 1rem; border: 1px solid #ff6b6b; margin-bottom: 1.5rem;">
+              {{ form.errors | default_errors }}
+            </div>
+          {% endif %}
+
+          <input type="hidden" name="contact[subject]" value="Invitation Request - Chicago Futures Salon">
+
+          <div class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-white text-sm font-bold mb-2" for="firstName">
+                  First Name *
+                </label>
+                <input type="text"
+                       id="firstName"
+                       name="contact[first_name]"
+                       required
+                       class="w-full px-4 py-3 bg-black border border-white/30 text-white focus:border-white focus:outline-none"
+                       placeholder="John">
+              </div>
+
+              <div>
+                <label class="block text-white text-sm font-bold mb-2" for="lastName">
+                  Last Name *
+                </label>
+                <input type="text"
+                       id="lastName"
+                       name="contact[last_name]"
+                       required
+                       class="w-full px-4 py-3 bg-black border border-white/30 text-white focus:border-white focus:outline-none"
+                       placeholder="Doe">
+              </div>
             </div>
 
             <div>
-              <label class="block text-white text-sm font-bold mb-2" for="lastName">
-                Last Name *
+              <label class="block text-white text-sm font-bold mb-2" for="email">
+                Email Address *
               </label>
-              <input type="text"
-                     id="lastName"
-                     name="lastName"
+              <input type="email"
+                     id="email"
+                     name="contact[email]"
                      required
                      class="w-full px-4 py-3 bg-black border border-white/30 text-white focus:border-white focus:outline-none"
-                     placeholder="Doe">
+                     placeholder="john@example.com">
             </div>
-          </div>
 
-          <div>
-            <label class="block text-white text-sm font-bold mb-2" for="email">
-              Email Address *
-            </label>
-            <input type="email"
-                   id="email"
-                   name="email"
-                   required
-                   class="w-full px-4 py-3 bg-black border border-white/30 text-white focus:border-white focus:outline-none"
-                   placeholder="john@example.com">
-          </div>
+            <div>
+              <label class="block text-white text-sm font-bold mb-2" for="organization">
+                Organization *
+              </label>
+              <input type="text"
+                     id="organization"
+                     name="contact[organization]"
+                     required
+                     class="w-full px-4 py-3 bg-black border border-white/30 text-white focus:border-white focus:outline-none"
+                     placeholder="Your company">
+            </div>
 
-          <div>
-            <label class="block text-white text-sm font-bold mb-2" for="organization">
-              Organization *
-            </label>
-            <input type="text"
-                   id="organization"
-                   name="organization"
-                   required
-                   class="w-full px-4 py-3 bg-black border border-white/30 text-white focus:border-white focus:outline-none"
-                   placeholder="Your company">
-          </div>
+            <div>
+              <label class="block text-white text-sm font-bold mb-2" for="interest">
+                Why are you interested? *
+              </label>
+              <textarea id="interest"
+                        name="contact[body]"
+                        required
+                        rows="4"
+                        class="w-full px-4 py-3 bg-black border border-white/30 text-white focus:border-white focus:outline-none"
+                        placeholder="Tell us about your interest in futures thinking..."></textarea>
+            </div>
 
-          <div>
-            <label class="block text-white text-sm font-bold mb-2" for="interest">
-              Why are you interested? *
-            </label>
-            <textarea id="interest"
-                      name="interest"
-                      required
-                      rows="4"
-                      class="w-full px-4 py-3 bg-black border border-white/30 text-white focus:border-white focus:outline-none"
-                      placeholder="Tell us about your interest in futures thinking..."></textarea>
+            <button type="submit"
+                    class="btn btn-primary w-full">
+              Submit Request
+            </button>
           </div>
-
-          <button type="submit"
-                  id="submit-btn"
-                  class="btn btn-primary w-full">
-            Submit Request
-          </button>
-
-          <div id="success-message" style="display: none; color: #00d4ff; text-align: center; padding: 1rem; border: 1px solid #00d4ff; margin-top: 1rem;">
-            Thank you! Your request has been submitted. We'll be in touch soon.
-          </div>
-        </form>
+        {% endform %}
 
         <p class="text-white/60 text-sm text-center mt-6">
           * Required fields
@@ -154,11 +160,8 @@
       "label": "Subheading"
     },
     {
-      "type": "text",
-      "id": "notification_email",
-      "label": "Email Address",
-      "info": "Enter your email address to receive form submissions. First submission will require email confirmation.",
-      "default": "mike.hyzy@gmail.com"
+      "type": "paragraph",
+      "content": "Form submissions will be sent to the email address configured in your Shopify store settings (Settings > General > Store contact email)."
     }
   ],
   "presets": [
@@ -168,33 +171,3 @@
   ]
 }
 {% endschema %}
-
-<script>
-  document.getElementById('invitation-form').addEventListener('submit', function(e) {
-    const email = '{{ section.settings.notification_email }}';
-
-    if (!email || email === '') {
-      e.preventDefault();
-      alert('Email address not configured. Please contact the site administrator.');
-      return;
-    }
-
-    // Change button text immediately
-    document.getElementById('submit-btn').textContent = 'Submitting...';
-    document.getElementById('submit-btn').disabled = true;
-
-    // Note: FormSubmit will handle the actual submission in new tab
-    // Show success message after brief delay
-    setTimeout(function() {
-      document.getElementById('success-message').style.display = 'block';
-      document.getElementById('invitation-form').reset();
-      document.getElementById('submit-btn').textContent = 'Request Submitted!';
-
-      setTimeout(function() {
-        document.getElementById('submit-btn').textContent = 'Submit Request';
-        document.getElementById('submit-btn').disabled = false;
-        document.getElementById('success-message').style.display = 'none';
-      }, 5000);
-    }, 500);
-  });
-</script>
