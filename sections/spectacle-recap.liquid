@@ -97,19 +97,17 @@
       <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 2rem; line-height: 1.6;">
         A hands-on session applying Surrealist and Situationist creative techniques to futures thinking and business strategy. Participants work through a series of provocations designed to break habitual thinking patterns and generate creative business ideas that shift the paradigm.
       </p>
-      {% if section.settings.workshop_video_url != blank %}
-        <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000;">
-          <iframe src="{{ section.settings.workshop_video_url }}"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
-        </div>
-      {% else %}
-        <div style="background-color: #000000; border: 2px dashed rgba(255, 255, 255, 0.3); padding: 4rem 2rem; text-align: center;">
-          <p style="color: rgba(255, 255, 255, 0.5); font-style: italic;">YouTube video embed will appear here</p>
-        </div>
-      {% endif %}
+      <div style="background-color: #000000; border: 2px solid rgba(255, 255, 255, 0.3); padding: 4rem 2rem; text-align: center;">
+        <p style="color: rgba(255, 255, 255, 0.8); font-size: 1.125rem; margin-bottom: 2rem; line-height: 1.6;">
+          Want to try the provocations yourself? Explore our collection of creative tools designed to disrupt conventional thinking.
+        </p>
+        <a href="https://chicagofuturessalon.com/collections/all"
+           style="display: inline-block; padding: 1rem 2.5rem; background-color: #ffffff; color: #000000; border: 2px solid #ffffff; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; text-decoration: none; transition: all 0.3s;"
+           onmouseover="this.style.backgroundColor='#000000'; this.style.color='#ffffff'"
+           onmouseout="this.style.backgroundColor='#ffffff'; this.style.color='#000000'">
+          Explore Provocations
+        </a>
+      </div>
     </div>
 
     <!-- Session 4: Chicago 2040 -->
