@@ -3,10 +3,10 @@
     "spectacle-recap": {
       "type": "spectacle-recap",
       "settings": {
-        "welcome_video_url": "",
-        "keynote_video_url": "",
+        "welcome_video_url": "https://www.youtube.com/embed/ehRVFlzY4hc",
+        "keynote_video_url": "https://www.youtube.com/embed/Vwgm67f-QYM",
         "workshop_video_url": "",
-        "chicago2040_video_url": "",
+        "chicago2040_video_url": "https://www.youtube.com/embed/-hxe5v7ldp0",
         "jazz_video_url": "",
         "improv_video_url": ""
       }
