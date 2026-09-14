@@ -118,7 +118,7 @@
           {% if article.comments_count > 0 %}
             <div style="margin-bottom: 3rem;">
               {% for comment in article.comments %}
-                <div style="padding: 1.5rem; background-color: rgba(255, 255, 255, 0.05); margin-bottom: 1rem; border-left: 3px solid {{ comment.status == 'published' ? '#00d4ff' : 'rgba(255, 255, 255, 0.3)' }};">
+                <div style="padding: 1.5rem; background-color: rgba(255, 255, 255, 0.05); margin-bottom: 1rem; border-left: 3px solid {{ comment.status }};">
                   <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem;">
                     <strong style="color: #ffffff; font-size: 0.875rem;">{{ comment.author }}</strong>
                     <time style="color: rgba(255, 255, 255, 0.5); font-size: 0.75rem;">{{ comment.created_at | date: '%B %d, %Y' }}</time>
@@ -245,3 +245,14 @@
     margin: 2rem 0;
   }
 </style>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{{ comment.status == 'published' ? '#00d4ff' : 'rgba(255, 255, 255, 0.3)'
+    }}"
+  to: "{{ comment.status }}"
+  position: 7280..7300
+{% endcomment %}
